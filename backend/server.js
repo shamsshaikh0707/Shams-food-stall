@@ -9,7 +9,9 @@ const Product = require("./models/Product");
 const Order = require("./models/Order");
 
 const app = express();
-const PORT = 3000;
+
+// Use Render's PORT in production, 3000 locally
+const PORT = process.env.PORT || 3000;
 
 /* =========================================
    MIDDLEWARE
@@ -209,7 +211,7 @@ app.put("/api/products/:id", requireAdmin, async (req, res) => {
             req.params.id,
             updateData,
             {
-                new: true,
+                returnDocument: "after",
                 runValidators: true
             }
         );
@@ -311,7 +313,10 @@ app.post("/api/orders", async (req, res) => {
            ITEMS VALIDATION
            ----------------------------- */
 
-        if (!Array.isArray(items) || items.length === 0) {
+        if (
+            !Array.isArray(items) ||
+            items.length === 0
+        ) {
             return res.status(400).json({
                 message: "Order must contain at least one item"
             });
@@ -471,7 +476,7 @@ app.put(
                         status
                     },
                     {
-                        new: true,
+                        returnDocument: "after",
                         runValidators: true
                     }
                 );
@@ -566,13 +571,10 @@ mongoose
         console.log("🍔 SHAMS FOOD STALL");
         console.log("=================================");
         console.log(
-            "Backend: http://localhost:3000"
+            "Frontend: /frontend/"
         );
         console.log(
-            "Frontend: http://localhost:3000/frontend/"
-        );
-        console.log(
-            "Admin: http://localhost:3000/admin/"
+            "Admin: /admin/"
         );
         console.log("=================================");
         console.log("");
@@ -592,8 +594,8 @@ mongoose
    START SERVER
    ========================================= */
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(
-        `Server running on http://localhost:${PORT}`
+        `Server running on port ${PORT}`
     );
 });
