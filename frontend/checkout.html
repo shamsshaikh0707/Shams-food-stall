@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Checkout - Shams Food Stall</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            padding: 18px 20px;
+        }
+
+        header .header-inner {
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            background: #f57c00;
+            padding: 9px 14px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .box h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #f57c00;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .address-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: bold;
+        }
+
+        .item-details {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .item-price {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .total-row {
+            border-top: 2px solid #eee;
+            margin-top: 15px;
+            padding-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .place-order-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #198754;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .place-order-btn:hover {
+            background: #157347;
+        }
+
+        .place-order-btn:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 30px 10px;
+            color: #777;
+        }
+
+        .empty-cart a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            background: #f57c00;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+        }
+
+        .message {
+            display: none;
+            padding: 12px;
+            margin-bottom: 18px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .success {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        @media (max-width: 750px) {
+            .checkout-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .address-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header .header-inner {
+                flex-direction: column;
+            }
+
+            header h1 {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-inner">
+        <h1>🍔 Shams Food Stall</h1>
+
+        <a href="index.html" class="back-btn">
+            ← Back to Menu
+        </a>
+    </div>
+</header>
+
+<div class="container">
+
+    <h1 class="page-title">Checkout</h1>
+
+    <div id="message" class="message"></div>
+
+    <div class="checkout-grid">
+
+        <!-- CUSTOMER DETAILS -->
+
+        <div class="box">
+
+            <h2>Customer Details</h2>
+
+            <form id="checkoutForm">
+
+                <div class="form-group">
+                    <label for="name">
+                        Full Name <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">
+                        Phone Number <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter your phone number"
+                        required
+                    >
+                </div>
+
+                <h2 style="margin-top: 30px;">
+                    Delivery Address
+                </h2>
+
+                <div class="address-grid">
+
+                    <div class="form-group">
+                        <label for="house">
+                            House / Flat No. <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="house"
+                            placeholder="House / Flat"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pincode">
+                            Pincode <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="pincode"
+                            placeholder="Pincode"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="street">
+                        Street / Area <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="street"
+                        placeholder="Street, area or landmark"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="city">
+                        City <span class="required">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        placeholder="City"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="note">
+                        Order Note
+                    </label>
+
+                    <textarea
+                        id="note"
+                        placeholder="Any special instructions? (Optional)"
+                    ></textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    id="placeOrderBtn"
+                    class="place-order-btn"
+                >
+                    Place Order
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- ORDER SUMMARY -->
+
+        <div class="box">
+
+            <h2>Your Order</h2>
+
+            <div id="orderItems"></div>
+
+            <div class="total-row">
+                <span>Total</span>
+                <span id="orderTotal">₹0</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const API = "/api";
+
+    const CART_KEY = "shamsCart";
+
+    const form = document.getElementById("checkoutForm");
+    const orderItems = document.getElementById("orderItems");
+    const orderTotal = document.getElementById("orderTotal");
+    const message = document.getElementById("message");
+    const placeOrderBtn = document.getElementById("placeOrderBtn");
+
+    let cart = [];
+
+    /* =========================================
+       LOAD CART
+       ========================================= */
+
+    function loadCart() {
+        try {
+            const savedCart = localStorage.getItem(CART_KEY);
+
+            cart = savedCart
+                ? JSON.parse(savedCart)
+                : [];
+        } catch (error) {
+            console.error("Cart loading error:", error);
+            cart = [];
+        }
+
+        if (!Array.isArray(cart)) {
+            cart = [];
+        }
+
+        renderCart();
+    }
+
+    /* =========================================
+       RENDER CART
+       ========================================= */
+
+    function renderCart() {
+        orderItems.innerHTML = "";
+
+        if (cart.length === 0) {
+            orderItems.innerHTML = `
+                <div class="empty-cart">
+                    <p>Your cart is empty.</p>
+
+                    <a href="index.html">
+                        Go to Menu
+                    </a>
+                </div>
+            `;
+
+            orderTotal.textContent = "₹0";
+            placeOrderBtn.disabled = true;
+
+            return;
+        }
+
+        let total = 0;
+
+        cart.forEach((item) => {
+            const quantity = Number(item.quantity) || 1;
+            const price = Number(item.price) || 0;
+
+            const itemTotal = price * quantity;
+
+            total += itemTotal;
+
+            const div = document.createElement("div");
+
+            div.className = "order-item";
+
+            div.innerHTML = `
+                <div>
+                    <div class="item-name">
+                        ${escapeHtml(item.name || "Product")}
+                    </div>
+
+                    <div class="item-details">
+                        ₹${price.toFixed(2)}
+                        ×
+                        ${quantity}
+                    </div>
+                </div>
+
+                <div class="item-price">
+                    ₹${itemTotal.toFixed(2)}
+                </div>
+            `;
+
+            orderItems.appendChild(div);
+        });
+
+        orderTotal.textContent =
+            "₹" + total.toFixed(2);
+
+        placeOrderBtn.disabled = false;
+    }
+
+    /* =========================================
+       CALCULATE TOTAL
+       ========================================= */
+
+    function calculateTotal() {
+        return cart.reduce((total, item) => {
+            const price = Number(item.price) || 0;
+            const quantity = Number(item.quantity) || 1;
+
+            return total + price * quantity;
+        }, 0);
+    }
+
+    /* =========================================
+       HTML ESCAPE
+       ========================================= */
+
+    function escapeHtml(value) {
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    /* =========================================
+       SHOW MESSAGE
+       ========================================= */
+
+    function showMessage(text, type) {
+        message.textContent = text;
+
+        message.className =
+            "message " + type;
+
+        message.style.display = "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+    /* =========================================
+       HIDE MESSAGE
+       ========================================= */
+
+    function hideMessage() {
+        message.style.display = "none";
+    }
+
+    /* =========================================
+       PLACE ORDER
+       ========================================= */
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        hideMessage();
+
+        if (cart.length === 0) {
+            showMessage(
+                "Your cart is empty.",
+                "error"
+            );
+
+            return;
+        }
+
+        const name =
+            document.getElementById("name")
+                .value.trim();
+
+        const phone =
+            document.getElementById("phone")
+                .value.trim();
+
+        const house =
+            document.getElementById("house")
+                .value.trim();
+
+        const street =
+            document.getElementById("street")
+                .value.trim();
+
+        const city =
+            document.getElementById("city")
+                .value.trim();
+
+        const pincode =
+            document.getElementById("pincode")
+                .value.trim();
+
+        const note =
+            document.getElementById("note")
+                .value.trim();
+
+        if (
+            !name ||
+            !phone ||
+            !house ||
+            !street ||
+            !city ||
+            !pincode
+        ) {
+            showMessage(
+                "Please fill in all required fields.",
+                "error"
+            );
+
+            return;
+        }
+
+        const total = calculateTotal();
+
+        if (total <= 0) {
+            showMessage(
+                "Invalid order total.",
+                "error"
+            );
+
+            return;
+        }
+
+        const items = cart.map((item) => ({
+            productId: item.productId || item._id,
+            name: item.name,
+            price: Number(item.price),
+            quantity: Number(item.quantity) || 1
+        }));
+
+        const orderData = {
+            customer: {
+                name,
+                phone
+            },
+
+            address: {
+                house,
+                street,
+                city,
+                pincode
+            },
+
+            note,
+
+            items,
+
+            total
+        };
+
+        placeOrderBtn.disabled = true;
+        placeOrderBtn.textContent =
+            "Placing Order...";
+
+        try {
+            const response = await fetch(
+                `${API}/orders`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify(orderData)
+                }
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message ||
+                    "Failed to place order"
+                );
+            }
+
+            /* -----------------------------
+               CLEAR CART
+               ----------------------------- */
+
+            localStorage.removeItem(CART_KEY);
+
+            /* -----------------------------
+               SAVE ORDER FOR SUCCESS PAGE
+               ----------------------------- */
+
+            localStorage.setItem(
+                "shamsLastOrder",
+                JSON.stringify(data.order)
+            );
+
+            /* -----------------------------
+               GO TO SUCCESS PAGE
+               ----------------------------- */
+
+            window.location.href =
+                "success.html";
+
+        } catch (error) {
+            console.error(
+                "Place order error:",
+                error
+            );
+
+            showMessage(
+                error.message ||
+                "Something went wrong. Please try again.",
+                "error"
+            );
+
+            placeOrderBtn.disabled = false;
+
+            placeOrderBtn.textContent =
+                "Place Order";
+        }
+    });
+
+    /* =========================================
+       START
+       ========================================= */
+
+    loadCart();
+</script>
+
+</body>
+</html>

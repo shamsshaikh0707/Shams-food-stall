@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Login - Shams Food Stall</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #202428,
+                    #343a40
+                );
+
+        }
+
+
+        /* =========================
+           LOGIN CARD
+        ========================= */
+
+        .login-card {
+
+            width: 100%;
+            max-width: 430px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.30);
+
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .login-header {
+
+            background: #202428;
+
+            color: white;
+
+            padding: 35px 25px;
+
+            text-align: center;
+
+        }
+
+
+        .brand-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .login-header h1 {
+
+            font-size: 27px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .login-header p {
+
+            color: #cfd3d6;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =========================
+           BODY
+        ========================= */
+
+        .login-body {
+
+            padding: 35px;
+
+        }
+
+
+        .login-body h2 {
+
+            font-size: 23px;
+
+            margin-bottom: 25px;
+
+            color: #222;
+
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-message {
+
+            display: none;
+
+            background: #ffebee;
+
+            color: #c62828;
+
+            border: 1px solid #ef9a9a;
+
+            border-radius: 7px;
+
+            padding: 12px 14px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+
+            line-height: 1.4;
+
+        }
+
+
+        .error-message.show {
+
+            display: block;
+
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            color: #333;
+
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #1976d2;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(25, 118, 210, 0.12);
+
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-button {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #1976d2;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s;
+
+        }
+
+
+        .login-button:hover {
+
+            background: #1565c0;
+
+        }
+
+
+        .login-button:disabled {
+
+            background: #90caf9;
+
+            cursor: not-allowed;
+
+        }
+
+
+        /* =========================
+           BACK LINK
+        ========================= */
+
+        .back-link-container {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+        }
+
+
+        .back-link {
+
+            color: #1976d2;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+        }
+
+
+        .back-link:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading-text {
+
+            display: none;
+
+            text-align: center;
+
+            color: #666;
+
+            font-size: 14px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .loading-text.show {
+
+            display: block;
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding: 12px;
+
+            }
+
+
+            .login-header {
+
+                padding: 30px 20px;
+
+            }
+
+
+            .login-body {
+
+                padding: 25px 20px;
+
+            }
+
+
+            .brand-icon {
+
+                font-size: 48px;
+
+            }
+
+
+            .login-header h1 {
+
+                font-size: 23px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-card">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <div class="login-header">
+
+        <div class="brand-icon">
+            🍔
+        </div>
+
+        <h1>
+            Shams Food Stall
+        </h1>
+
+        <p>
+            Admin Panel
+        </p>
+
+    </div>
+
+
+    <!-- =========================
+         BODY
+    ========================== -->
+
+    <div class="login-body">
+
+        <h2>
+            Admin Login
+        </h2>
+
+
+        <div
+            id="error-message"
+            class="error-message"
+        ></div>
+
+
+        <div
+            id="loading-text"
+            class="loading-text"
+        >
+            Checking existing session...
+        </div>
+
+
+        <form id="login-form">
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username"
+                    required
+                    autocomplete="username"
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                    required
+                    autocomplete="current-password"
+                >
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button
+                type="submit"
+                id="login-button"
+                class="login-button"
+            >
+                🔐 Login
+            </button>
+
+
+        </form>
+
+
+        <!-- BACK -->
+
+        <div class="back-link-container">
+
+            <a
+                href="../frontend/"
+                class="back-link"
+            >
+                ← Back to customer website
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/*
+========================================
+SHAMS FOOD STALL ADMIN LOGIN
+========================================
+
+IMPORTANT:
+
+The same token key is used by:
+
+admin/login.html
+admin/index.html
+admin/orders.html
+
+Do NOT change this key.
+*/
+
+const API = "/api";
+
+const TOKEN_KEY = "adminToken";
+
+
+// ========================================
+// ELEMENTS
+// ========================================
+
+const loginForm =
+    document.getElementById(
+        "login-form"
+    );
+
+
+const usernameInput =
+    document.getElementById(
+        "username"
+    );
+
+
+const passwordInput =
+    document.getElementById(
+        "password"
+    );
+
+
+const loginButton =
+    document.getElementById(
+        "login-button"
+    );
+
+
+const errorMessage =
+    document.getElementById(
+        "error-message"
+    );
+
+
+const loadingText =
+    document.getElementById(
+        "loading-text"
+    );
+
+
+// ========================================
+// SHOW ERROR
+// ========================================
+
+function showError(message) {
+
+    errorMessage.textContent =
+        message;
+
+    errorMessage.classList.add(
+        "show"
+    );
+
+}
+
+
+// ========================================
+// HIDE ERROR
+// ========================================
+
+function hideError() {
+
+    errorMessage.textContent =
+        "";
+
+    errorMessage.classList.remove(
+        "show"
+    );
+
+}
+
+
+// ========================================
+// CHECK EXISTING LOGIN
+// ========================================
+
+async function checkExistingLogin() {
+
+    const token =
+        localStorage.getItem(
+            TOKEN_KEY
+        );
+
+
+    if (!token) {
+
+        return;
+
+    }
+
+
+    loadingText.classList.add(
+        "show"
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/admin/check`,
+                {
+                    method: "GET",
+
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${token}`
+
+                    }
+                }
+            );
+
+
+        if (response.ok) {
+
+            /*
+             * Already logged in.
+             * Go directly to dashboard.
+             */
+
+            window.location.replace(
+                "index.html"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * Token is invalid.
+         */
+
+        localStorage.removeItem(
+            TOKEN_KEY
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Session check error:",
+            error
+        );
+
+        /*
+         * Do not block login if
+         * session checking fails.
+         */
+
+    }
+    finally {
+
+        loadingText.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+// ========================================
+// LOGIN
+// ========================================
+
+loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        hideError();
+
+
+        const username =
+            usernameInput.value.trim();
+
+
+        const password =
+            passwordInput.value;
+
+
+        if (!username) {
+
+            showError(
+                "Please enter your username."
+            );
+
+            usernameInput.focus();
+
+            return;
+
+        }
+
+
+        if (!password) {
+
+            showError(
+                "Please enter your password."
+            );
+
+            passwordInput.focus();
+
+            return;
+
+        }
+
+
+        /*
+         * Disable button while
+         * login request is running.
+         */
+
+        loginButton.disabled = true;
+
+        loginButton.textContent =
+            "Logging in...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/admin/login`,
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                username:
+                                    username,
+
+                                password:
+                                    password
+
+                            })
+
+                    }
+                );
+
+
+            let data = {};
+
+            try {
+
+                data =
+                    await response.json();
+
+            }
+            catch {
+
+                data = {};
+
+            }
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Invalid username or password."
+                );
+
+            }
+
+
+            if (!data.token) {
+
+                throw new Error(
+                    "Login successful, but the server did not return a token."
+                );
+
+            }
+
+
+            /*
+             * IMPORTANT:
+             * Store token using the SAME
+             * key used everywhere else.
+             */
+
+            localStorage.setItem(
+                TOKEN_KEY,
+                data.token
+            );
+
+
+            /*
+             * Go to admin dashboard.
+             */
+
+            window.location.replace(
+                "index.html"
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Login error:",
+                error
+            );
+
+
+            showError(
+                error.message ||
+                "Unable to login. Please try again."
+            );
+
+
+            loginButton.disabled =
+                false;
+
+            loginButton.textContent =
+                "🔐 Login";
+
+        }
+
+    }
+);
+
+
+// ========================================
+// START
+// ========================================
+
+checkExistingLogin();
+
+</script>
+
+
+</body>
+</html>
