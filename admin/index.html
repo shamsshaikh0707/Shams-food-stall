@@ -29,20 +29,17 @@
             cursor: pointer;
         }
 
-        /* =========================
-           HEADER
-        ========================= */
+        /* ================= HEADER ================= */
 
         header {
             background: #111;
             color: white;
             padding: 18px 30px;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            gap: 20px;
         }
 
         header h1 {
@@ -52,6 +49,7 @@
         .header-buttons {
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .orders-btn {
@@ -78,9 +76,7 @@
             background: #c62828;
         }
 
-        /* =========================
-           MAIN CONTAINER
-        ========================= */
+        /* ================= MAIN ================= */
 
         .container {
             max-width: 1200px;
@@ -100,9 +96,7 @@
             color: #666;
         }
 
-        /* =========================
-           STATS
-        ========================= */
+        /* ================= STATS ================= */
 
         .stats {
             display: grid;
@@ -115,8 +109,7 @@
             background: white;
             padding: 25px;
             border-radius: 10px;
-
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .stat-card h3 {
@@ -130,24 +123,26 @@
             font-weight: bold;
         }
 
-        /* =========================
-           SECTION
-        ========================= */
+        .pending-number {
+            color: #ff9800;
+        }
+
+        /* ================= SECTION ================= */
 
         .section {
             background: white;
             padding: 25px;
             border-radius: 10px;
-
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             margin-bottom: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .section-header h2 {
@@ -157,10 +152,8 @@
         .add-btn {
             background: #2e7d32;
             color: white;
-
             padding: 11px 18px;
             border-radius: 7px;
-
             font-weight: bold;
         }
 
@@ -168,19 +161,40 @@
             background: #1b5e20;
         }
 
-        /* =========================
-           PRODUCT FORM
-        ========================= */
+        /* ================= SEARCH ================= */
+
+        .search-area {
+            margin-bottom: 25px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: #1976d2;
+            box-shadow: 0 0 0 2px rgba(25,118,210,0.1);
+        }
+
+        .search-result {
+            margin-top: 8px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* ================= FORM ================= */
 
         .product-form {
             display: none;
-
             background: #f7f7f7;
             padding: 20px;
-
             border-radius: 8px;
             margin-bottom: 25px;
-
             border: 1px solid #ddd;
         }
 
@@ -200,28 +214,20 @@
 
         .form-group label {
             display: block;
-
             font-weight: bold;
             margin-bottom: 7px;
         }
 
-        input[type="text"],
-        input[type="number"],
-        input[type="url"] {
+        .form-group input {
             width: 100%;
-
             padding: 12px;
-
             border: 1px solid #ccc;
             border-radius: 6px;
-
             font-size: 15px;
             outline: none;
         }
 
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        input[type="url"]:focus {
+        .form-group input:focus {
             border-color: #1976d2;
         }
 
@@ -238,13 +244,17 @@
             margin-right: 7px;
         }
 
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .save-btn {
             background: #1976d2;
             color: white;
-
             padding: 11px 18px;
             border-radius: 6px;
-
             font-weight: bold;
         }
 
@@ -255,21 +265,16 @@
         .cancel-btn {
             background: #777;
             color: white;
-
             padding: 11px 18px;
             border-radius: 6px;
-
             font-weight: bold;
-            margin-left: 6px;
         }
 
         .cancel-btn:hover {
             background: #555;
         }
 
-        /* =========================
-           PRODUCTS
-        ========================= */
+        /* ================= PRODUCTS ================= */
 
         .products {
             display: grid;
@@ -279,203 +284,121 @@
 
         .product-card {
             background: white;
-
             border: 1px solid #ddd;
             border-radius: 10px;
-
             overflow: hidden;
-
-            transition: transform 0.15s ease,
-                        box-shadow 0.15s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         }
 
-        .product-card:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 5px 15px rgba(0, 0, 0, 0.10);
-        }
-
-        .product-image {
+        .product-image,
+        .no-image {
             width: 100%;
             height: 180px;
-
             object-fit: cover;
-
-            display: block;
-
-            background: #eee;
         }
 
         .no-image {
-            height: 180px;
-
             background: #eee;
-
             display: flex;
-            justify-content: center;
             align-items: center;
-
+            justify-content: center;
             color: #888;
-            font-weight: bold;
         }
 
         .product-info {
-            padding: 15px;
+            padding: 18px;
         }
 
         .product-info h3 {
             margin-bottom: 8px;
-            font-size: 19px;
         }
 
         .price {
-            font-size: 19px;
+            font-size: 20px;
             font-weight: bold;
-
+            color: #1976d2;
             margin-bottom: 8px;
         }
 
         .available {
-            color: #2e7d32;
+            color: #198754;
             font-weight: bold;
         }
 
         .unavailable {
-            color: #e53935;
+            color: #dc3545;
             font-weight: bold;
         }
 
-        .actions {
+        .product-actions {
             display: flex;
             gap: 8px;
-
             margin-top: 15px;
-        }
-
-        .edit-btn,
-        .delete-btn {
-            flex: 1;
-
-            padding: 10px;
-
-            border-radius: 6px;
-
-            color: white;
-            font-weight: bold;
         }
 
         .edit-btn {
             background: #1976d2;
+            color: white;
+            padding: 9px 13px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            padding: 9px 13px;
+            border-radius: 6px;
+            font-weight: bold;
         }
 
         .edit-btn:hover {
             background: #1565c0;
         }
 
-        .delete-btn {
-            background: #e53935;
-        }
-
         .delete-btn:hover {
-            background: #c62828;
+            background: #bb2d3b;
         }
 
-        /* =========================
-           EMPTY / LOADING
-        ========================= */
+        /* ================= EMPTY / LOADING ================= */
 
-        .empty {
-            text-align: center;
-
-            padding: 50px 20px;
-
-            color: #777;
-
-            grid-column: 1 / -1;
-        }
-
-        .empty h3 {
-            margin-bottom: 8px;
-            color: #555;
-        }
-
+        .empty,
         .loading {
-            text-align: center;
-
-            padding: 50px 20px;
-
-            color: #777;
-
             grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px 20px;
+            color: #777;
         }
 
-        /* =========================
-           NOTIFICATION
-        ========================= */
+        /* ================= NOTIFICATION ================= */
 
         .notification {
-            display: none;
-
             position: fixed;
-
             right: 20px;
-            top: 20px;
-
-            padding: 15px 20px;
-
+            bottom: 20px;
+            background: #198754;
             color: white;
-
+            padding: 15px 20px;
             border-radius: 8px;
-
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: none;
             z-index: 9999;
-
-            box-shadow:
-                0 5px 20px rgba(0, 0, 0, 0.2);
-
-            font-weight: bold;
-
             max-width: 350px;
         }
 
-
-        /* =========================
-           PRODUCT SEARCH
-        ========================= */
-
-        .product-search {
-            width: 100%;
-            padding: 12px 14px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
-            font-size: 15px;
-            outline: none;
+        .notification.error {
+            background: #dc3545;
         }
 
-        .product-search:focus {
-            border-color: #1976d2;
+        .notification.show {
+            display: block;
         }
 
-        .search-result {
-            color: #666;
-            font-size: 14px;
-            margin-top: -12px;
-            margin-bottom: 15px;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
+        /* ================= RESPONSIVE ================= */
 
         @media (max-width: 900px) {
-
             .products {
                 grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
             }
 
             .form-grid {
@@ -483,56 +406,22 @@
             }
         }
 
-        @media (max-width: 600px) {
-
+        @media (max-width: 700px) {
             header {
                 flex-direction: column;
-                gap: 15px;
-
-                text-align: center;
+                align-items: flex-start;
             }
 
-            .header-buttons {
-                width: 100%;
-            }
-
-            .header-buttons button {
-                flex: 1;
+            .stats {
+                grid-template-columns: 1fr;
             }
 
             .products {
                 grid-template-columns: 1fr;
             }
 
-            .section {
-                padding: 18px;
-            }
-
-            .section-header {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 15px;
-            }
-
-            .add-btn {
-                width: 100%;
-            }
-
             .container {
                 padding: 0 12px;
-            }
-
-            .product-form {
-                padding: 15px;
-            }
-
-            .actions {
-                flex-direction: column;
-            }
-
-            .cancel-btn {
-                margin-left: 0;
-                margin-top: 5px;
             }
         }
     </style>
@@ -542,7 +431,7 @@
 
 <header>
 
-    <h1>🍔 Shams Restaurant</h1>
+    <h1>🍔 Shams Restaurant - Admin</h1>
 
     <div class="header-buttons">
 
@@ -551,6 +440,7 @@
             onclick="goOrders()"
         >
             📦 Orders
+            <span id="headerPendingCount"></span>
         </button>
 
         <button
@@ -565,22 +455,20 @@
 </header>
 
 
-<div class="container">
+<main class="container">
 
     <div class="welcome">
 
-        <h2>Admin Dashboard</h2>
+        <h2>Welcome, Admin 👋</h2>
 
         <p>
-            Manage your food stall products and orders.
+            Manage your restaurant products and customer orders here.
         </p>
 
     </div>
 
 
-    <!-- =========================
-         STATS
-    ========================== -->
+    <!-- ================= STATS ================= -->
 
     <div class="stats">
 
@@ -606,11 +494,18 @@
         </div>
 
 
-        <div class="stat-card">
+        <div
+            class="stat-card"
+            onclick="goOrders()"
+            style="cursor:pointer;"
+        >
 
             <h3>Pending Orders</h3>
 
-            <p id="pendingOrders">
+            <p
+                id="pendingOrders"
+                class="pending-number"
+            >
                 0
             </p>
 
@@ -619,17 +514,13 @@
     </div>
 
 
-    <!-- =========================
-         PRODUCTS SECTION
-    ========================== -->
+    <!-- ================= PRODUCTS ================= -->
 
-    <div class="section">
+    <section class="section">
 
         <div class="section-header">
 
-            <h2>
-                🍽️ Products
-            </h2>
+            <h2>🍔 Products</h2>
 
             <button
                 class="add-btn"
@@ -637,6 +528,26 @@
             >
                 + Add Product
             </button>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-area">
+
+            <input
+                type="text"
+                id="productSearch"
+                class="search-box"
+                placeholder="🔍 Search products..."
+                autocomplete="off"
+            >
+
+            <div
+                id="searchResult"
+                class="search-result"
+            ></div>
 
         </div>
 
@@ -649,7 +560,7 @@
         >
 
             <h3 id="formTitle">
-                Add Product
+                Add New Product
             </h3>
 
 
@@ -665,7 +576,6 @@
                         type="text"
                         id="productName"
                         placeholder="Chicken Biryani"
-                        autocomplete="off"
                     >
 
                 </div>
@@ -674,14 +584,14 @@
                 <div class="form-group">
 
                     <label for="productPrice">
-                        Price (₹)
+                        Price
                     </label>
 
                     <input
                         type="number"
                         id="productPrice"
                         min="0"
-                        step="0.01"
+                        step="1"
                         placeholder="150"
                     >
 
@@ -697,8 +607,7 @@
                     <input
                         type="url"
                         id="productImage"
-                        placeholder="https://example.com/image.jpg"
-                        autocomplete="off"
+                        placeholder="https://..."
                     >
 
                 </div>
@@ -723,36 +632,26 @@
             </div>
 
 
-            <button
-                class="save-btn"
-                id="saveProductButton"
-                onclick="saveProduct()"
-            >
-                Save Product
-            </button>
+            <div class="form-buttons">
 
+                <button
+                    class="save-btn"
+                    id="saveProductButton"
+                    onclick="saveProduct()"
+                >
+                    Save Product
+                </button>
 
-            <button
-                class="cancel-btn"
-                onclick="cancelForm()"
-            >
-                Cancel
-            </button>
+                <button
+                    class="cancel-btn"
+                    onclick="cancelForm()"
+                >
+                    Cancel
+                </button>
+
+            </div>
 
         </div>
-
-
-        <!-- PRODUCT SEARCH -->
-
-        <input
-            type="text"
-            id="productSearch"
-            class="product-search"
-            placeholder="🔍 Search products by name..."
-            autocomplete="off"
-        >
-
-        <div id="searchResult" class="search-result"></div>
 
 
         <!-- PRODUCTS -->
@@ -768,14 +667,10 @@
 
         </div>
 
-    </div>
+    </section>
 
-</div>
+</main>
 
-
-<!-- =========================
-     NOTIFICATION
-========================== -->
 
 <div
     id="notification"
@@ -785,98 +680,1046 @@
 
 <script>
 
-const API = "/api";
+    /* =====================================================
+       CONFIG
+    ===================================================== */
 
-const TOKEN_KEY = "adminToken";
+    const API = "/api";
 
-let adminToken =
-    localStorage.getItem(TOKEN_KEY);
+    const TOKEN_KEY = "adminToken";
 
-let editingProductId = null;
-let allProducts = [];
+    const adminToken =
+        localStorage.getItem(TOKEN_KEY);
 
 
-// ========================================
-// START
-// ========================================
+    let allProducts = [];
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+    let editingProductId = null;
 
-        checkAdminSession();
+    let lastPendingCount = 0;
+
+
+    /* =====================================================
+       HELPERS
+    ===================================================== */
+
+    function escapeHtml(value) {
+
+        return String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
     }
-);
 
 
-// ========================================
-// PRODUCT SEARCH
-// ========================================
+    function handleUnauthorized() {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+        localStorage.removeItem(TOKEN_KEY);
+
+        window.location.replace("login.html");
+
+    }
+
+
+    function showNotification(message, error = false) {
+
+        const notification =
+            document.getElementById("notification");
+
+        notification.textContent = message;
+
+        notification.classList.toggle(
+            "error",
+            error
+        );
+
+        notification.classList.add("show");
+
+        setTimeout(() => {
+
+            notification.classList.remove("show");
+
+        }, 3500);
+
+    }
+
+
+    /* =====================================================
+       SESSION CHECK
+    ===================================================== */
+
+    async function checkAdminSession() {
+
+        if (!adminToken) {
+
+            window.location.replace("login.html");
+
+            return false;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/admin/check`,
+                    {
+                        headers: {
+                            "Authorization":
+                                `Bearer ${adminToken}`
+                        }
+                    }
+                );
+
+
+            if (response.status === 401) {
+
+                handleUnauthorized();
+
+                return false;
+
+            }
+
+
+            if (!response.ok) {
+
+                showNotification(
+                    "Unable to verify admin session.",
+                    true
+                );
+
+                return false;
+
+            }
+
+
+            return true;
+
+        }
+        catch (error) {
+
+            console.error(
+                "Session check error:",
+                error
+            );
+
+            showNotification(
+                "Cannot connect to backend.",
+                true
+            );
+
+            return false;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOAD PRODUCTS
+    ===================================================== */
+
+    async function loadProducts() {
+
+        const container =
+            document.getElementById("products");
+
+
+        container.innerHTML = `
+            <div class="loading">
+                Loading products...
+            </div>
+        `;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/products`
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to load products"
+                );
+
+            }
+
+
+            const products =
+                await response.json();
+
+
+            allProducts =
+                Array.isArray(products)
+                    ? products
+                    : [];
+
+
+            document.getElementById(
+                "totalProducts"
+            ).textContent =
+                allProducts.length;
+
+
+            document.getElementById(
+                "availableProducts"
+            ).textContent =
+                allProducts.filter(
+                    product =>
+                        product.available === true
+                ).length;
+
+
+            filterProducts();
+
+        }
+        catch (error) {
+
+            console.error(
+                "Load products error:",
+                error
+            );
+
+
+            container.innerHTML = `
+                <div class="empty">
+
+                    <h3>
+                        Failed to load products
+                    </h3>
+
+                    <br>
+
+                    <button
+                        class="save-btn"
+                        onclick="loadProducts()"
+                    >
+                        Retry
+                    </button>
+
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SEARCH PRODUCTS
+    ===================================================== */
+
+    function filterProducts() {
 
         const search =
-            document.getElementById("productSearch");
+            document
+                .getElementById("productSearch")
+                .value
+                .trim()
+                .toLowerCase();
+
+
+        const filtered =
+            allProducts.filter(
+                product =>
+                    String(
+                        product.name || ""
+                    )
+                    .toLowerCase()
+                    .includes(search)
+            );
+
+
+        renderProducts(filtered);
+
+    }
+
+
+    /* =====================================================
+       RENDER PRODUCTS
+    ===================================================== */
+
+    function renderProducts(products) {
+
+        const container =
+            document.getElementById("products");
+
+        const search =
+            document
+                .getElementById("productSearch")
+                .value
+                .trim();
+
+
+        const searchResult =
+            document.getElementById("searchResult");
+
 
         if (search) {
 
-            search.addEventListener(
-                "input",
-                function () {
+            searchResult.textContent =
+                `${products.length} product${
+                    products.length === 1
+                        ? ""
+                        : "s"
+                } found`;
 
-                    const term =
-                        search.value.trim().toLowerCase();
+        }
+        else {
 
-                    const filtered =
-                        allProducts.filter(
-                            product =>
-                                String(product.name || "")
-                                    .toLowerCase()
-                                    .includes(term)
+            searchResult.textContent = "";
+
+        }
+
+
+        if (products.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty">
+
+                    <h3>
+                        No products found
+                    </h3>
+
+                    <p>
+                        Try another search.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            products
+                .map(product => {
+
+                    const name =
+                        escapeHtml(
+                            product.name
                         );
 
-                    renderProducts(filtered);
+                    const image =
+                        escapeHtml(
+                            product.image || ""
+                        );
 
-                }
+                    const price =
+                        Number(
+                            product.price || 0
+                        );
+
+
+                    const imageHtml =
+                        image
+                            ? `
+                                <img
+                                    src="${image}"
+                                    class="product-image"
+                                    alt="${name}"
+                                    onerror="
+                                        this.onerror=null;
+                                        this.style.display='none';
+                                    "
+                                >
+                            `
+                            : `
+                                <div class="no-image">
+                                    No Image
+                                </div>
+                            `;
+
+
+                    return `
+                        <div class="product-card">
+
+                            ${imageHtml}
+
+                            <div class="product-info">
+
+                                <h3>
+                                    ${name}
+                                </h3>
+
+                                <div class="price">
+                                    ₹${price.toFixed(2)}
+                                </div>
+
+                                <div class="${
+                                    product.available
+                                        ? "available"
+                                        : "unavailable"
+                                }">
+
+                                    ${
+                                        product.available
+                                            ? "✓ Available"
+                                            : "✕ Unavailable"
+                                    }
+
+                                </div>
+
+
+                                <div class="product-actions">
+
+                                    <button
+                                        class="edit-btn"
+                                        onclick="editProductById('${product._id}')"
+                                    >
+                                        Edit
+                                    </button>
+
+                                    <button
+                                        class="delete-btn"
+                                        onclick="deleteProduct('${product._id}')"
+                                    >
+                                        Delete
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    `;
+
+                })
+                .join("");
+
+    }
+
+
+    /* =====================================================
+       ADD PRODUCT
+    ===================================================== */
+
+    function showAddForm() {
+
+        editingProductId = null;
+
+
+        document.getElementById(
+            "formTitle"
+        ).textContent =
+            "Add New Product";
+
+
+        document.getElementById(
+            "saveProductButton"
+        ).textContent =
+            "Save Product";
+
+
+        document.getElementById(
+            "productName"
+        ).value = "";
+
+
+        document.getElementById(
+            "productPrice"
+        ).value = "";
+
+
+        document.getElementById(
+            "productImage"
+        ).value = "";
+
+
+        document.getElementById(
+            "productAvailable"
+        ).checked = true;
+
+
+        document.getElementById(
+            "productForm"
+        ).classList.add("active");
+
+
+        document.getElementById(
+            "productName"
+        ).focus();
+
+    }
+
+
+    /* =====================================================
+       EDIT PRODUCT
+    ===================================================== */
+
+    function editProductById(id) {
+
+        const product =
+            allProducts.find(
+                item =>
+                    item._id === id
+            );
+
+
+        if (!product) {
+
+            showNotification(
+                "Product not found.",
+                true
+            );
+
+            return;
+
+        }
+
+
+        editingProductId = id;
+
+
+        document.getElementById(
+            "formTitle"
+        ).textContent =
+            "Edit Product";
+
+
+        document.getElementById(
+            "saveProductButton"
+        ).textContent =
+            "Update Product";
+
+
+        document.getElementById(
+            "productName"
+        ).value =
+            product.name || "";
+
+
+        document.getElementById(
+            "productPrice"
+        ).value =
+            product.price ?? "";
+
+
+        document.getElementById(
+            "productImage"
+        ).value =
+            product.image || "";
+
+
+        document.getElementById(
+            "productAvailable"
+        ).checked =
+            product.available !== false;
+
+
+        document.getElementById(
+            "productForm"
+        ).classList.add("active");
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =====================================================
+       SAVE PRODUCT
+    ===================================================== */
+
+    async function saveProduct() {
+
+        const name =
+            document
+                .getElementById("productName")
+                .value
+                .trim();
+
+
+        const price =
+            document
+                .getElementById("productPrice")
+                .value;
+
+
+        const image =
+            document
+                .getElementById("productImage")
+                .value
+                .trim();
+
+
+        const available =
+            document
+                .getElementById("productAvailable")
+                .checked;
+
+
+        if (!name) {
+
+            alert(
+                "Please enter product name."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            price === "" ||
+            Number(price) < 0
+        ) {
+
+            alert(
+                "Please enter a valid price."
+            );
+
+            return;
+
+        }
+
+
+        const data = {
+
+            name,
+
+            price: Number(price),
+
+            available,
+
+            image
+
+        };
+
+
+        try {
+
+            const url =
+                editingProductId
+                    ? `${API}/products/${editingProductId}`
+                    : `${API}/products`;
+
+
+            const method =
+                editingProductId
+                    ? "PUT"
+                    : "POST";
+
+
+            const response =
+                await fetch(
+                    url,
+                    {
+                        method,
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                `Bearer ${adminToken}`
+
+                        },
+
+                        body:
+                            JSON.stringify(data)
+
+                    }
+                );
+
+
+            if (response.status === 401) {
+
+                handleUnauthorized();
+
+                return;
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.message ||
+                    "Failed to save product."
+                );
+
+            }
+
+
+            showNotification(
+                editingProductId
+                    ? "Product updated successfully!"
+                    : "Product added successfully!"
+            );
+
+
+            cancelForm();
+
+            await loadProducts();
+
+        }
+        catch (error) {
+
+            console.error(
+                "Save product error:",
+                error
+            );
+
+
+            showNotification(
+                error.message ||
+                "Cannot connect to backend.",
+                true
             );
 
         }
 
     }
-);
 
 
-// ========================================
-// CHECK ADMIN SESSION
-// ========================================
+    /* =====================================================
+       DELETE PRODUCT
+    ===================================================== */
 
-async function checkAdminSession() {
+    async function deleteProduct(id) {
 
-    adminToken =
-        localStorage.getItem(TOKEN_KEY);
+        const product =
+            allProducts.find(
+                item =>
+                    item._id === id
+            );
 
 
-    if (!adminToken) {
+        if (!product) {
 
-        window.location.replace(
-            "login.html"
-        );
+            return;
 
-        return;
+        }
+
+
+        const confirmed =
+            confirm(
+                `Delete "${product.name}"?`
+            );
+
+
+        if (!confirmed) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/products/${id}`,
+                    {
+                        method: "DELETE",
+
+                        headers: {
+                            "Authorization":
+                                `Bearer ${adminToken}`
+                        }
+                    }
+                );
+
+
+            if (response.status === 401) {
+
+                handleUnauthorized();
+
+                return;
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.message ||
+                    "Failed to delete product."
+                );
+
+            }
+
+
+            showNotification(
+                "Product deleted successfully!"
+            );
+
+
+            await loadProducts();
+
+        }
+        catch (error) {
+
+            console.error(
+                "Delete product error:",
+                error
+            );
+
+
+            showNotification(
+                error.message ||
+                "Cannot connect to backend.",
+                true
+            );
+
+        }
 
     }
 
 
-    try {
+    /* =====================================================
+       CANCEL FORM
+    ===================================================== */
 
-        const response =
+    function cancelForm() {
+
+        editingProductId = null;
+
+
+        document.getElementById(
+            "productForm"
+        ).classList.remove("active");
+
+
+        document.getElementById(
+            "productName"
+        ).value = "";
+
+
+        document.getElementById(
+            "productPrice"
+        ).value = "";
+
+
+        document.getElementById(
+            "productImage"
+        ).value = "";
+
+
+        document.getElementById(
+            "productAvailable"
+        ).checked = true;
+
+
+        document.getElementById(
+            "saveProductButton"
+        ).textContent =
+            "Save Product";
+
+    }
+
+
+    /* =====================================================
+       LOAD ORDER STATS
+       IMPORTANT:
+       This keeps the admin connected to orders.html
+    ===================================================== */
+
+    async function loadOrderStats() {
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/orders`,
+                    {
+                        headers: {
+                            "Authorization":
+                                `Bearer ${adminToken}`
+                        }
+                    }
+                );
+
+
+            if (response.status === 401) {
+
+                handleUnauthorized();
+
+                return;
+
+            }
+
+
+            if (!response.ok) {
+
+                return;
+
+            }
+
+
+            const orders =
+                await response.json();
+
+
+            const pending =
+                orders.filter(
+                    order =>
+                        order.status === "Pending"
+                ).length;
+
+
+            document.getElementById(
+                "pendingOrders"
+            ).textContent =
+                pending;
+
+
+            const headerCount =
+                document.getElementById(
+                    "headerPendingCount"
+                );
+
+
+            if (pending > 0) {
+
+                headerCount.textContent =
+                    ` (${pending})`;
+
+            }
+            else {
+
+                headerCount.textContent = "";
+
+            }
+
+
+            /* NEW ORDER NOTIFICATION */
+
+            if (
+                lastPendingCount > 0 &&
+                pending > lastPendingCount
+            ) {
+
+                showNotification(
+                    "🔔 New order received!"
+                );
+
+                playNotificationSound();
+
+            }
+
+
+            lastPendingCount = pending;
+
+        }
+        catch (error) {
+
+            console.error(
+                "Order stats error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       NOTIFICATION SOUND
+    ===================================================== */
+
+    function playNotificationSound() {
+
+        try {
+
+            const audioContext =
+                new (
+                    window.AudioContext ||
+                    window.webkitAudioContext
+                )();
+
+
+            const oscillator =
+                audioContext.createOscillator();
+
+
+            const gain =
+                audioContext.createGain();
+
+
+            oscillator.connect(gain);
+
+            gain.connect(
+                audioContext.destination
+            );
+
+
+            oscillator.frequency.value =
+                800;
+
+
+            gain.gain.setValueAtTime(
+                0.2,
+                audioContext.currentTime
+            );
+
+
+            oscillator.start();
+
+
+            oscillator.stop(
+                audioContext.currentTime + 0.2
+            );
+
+        }
+        catch (error) {
+
+            console.log(
+                "Notification sound unavailable."
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       GO TO ORDERS
+    ===================================================== */
+
+    function goOrders() {
+
+        window.location.href =
+            "orders.html";
+
+    }
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    async function logout() {
+
+        try {
+
             await fetch(
-                `${API}/admin/check`,
+                `${API}/admin/logout`,
                 {
-                    method: "GET",
+                    method: "POST",
 
                     headers: {
                         "Authorization":
@@ -885,28 +1728,52 @@ async function checkAdminSession() {
                 }
             );
 
+        }
+        catch (error) {
 
-        if (response.status === 401) {
-
-            localStorage.removeItem(
-                TOKEN_KEY
+            console.error(
+                "Logout error:",
+                error
             );
-
-            window.location.replace(
-                "login.html"
-            );
-
-            return;
 
         }
 
 
-        if (!response.ok) {
+        localStorage.removeItem(
+            TOKEN_KEY
+        );
 
-            showNotification(
-                "Unable to verify admin session.",
-                true
-            );
+
+        window.location.replace(
+            "login.html"
+        );
+
+    }
+
+
+    /* =====================================================
+       SEARCH EVENT
+    ===================================================== */
+
+    document
+        .getElementById("productSearch")
+        .addEventListener(
+            "input",
+            filterProducts
+        );
+
+
+    /* =====================================================
+       START DASHBOARD
+    ===================================================== */
+
+    async function startDashboard() {
+
+        const authenticated =
+            await checkAdminSession();
+
+
+        if (!authenticated) {
 
             return;
 
@@ -917,1027 +1784,21 @@ async function checkAdminSession() {
 
         await loadOrderStats();
 
-    }
-    catch (error) {
 
-        console.error(
-            "Session check error:",
-            error
-        );
-
-        showNotification(
-            "Cannot connect to backend.",
-            true
-        );
-
-    }
-
-}
-
-
-// ========================================
-// LOAD PRODUCTS
-// ========================================
-
-async function loadProducts() {
-
-    const container =
-        document.getElementById(
-            "products"
-        );
-
-
-    container.innerHTML = `
-        <div class="loading">
-            Loading products...
-        </div>
-    `;
-
-
-    try {
-
-        const response =
-            await fetch(
-                `${API}/products`
-            );
-
-
-        if (response.status === 401) {
-
-            handleUnauthorized();
-
-            return;
-
-        }
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Failed to load products"
-            );
-
-        }
-
-
-        const products =
-            await response.json();
-
-        if (!Array.isArray(products)) {
-
-            throw new Error(
-                "Invalid products response"
-            );
-
-        }
-
-
-        allProducts = products;
-
-        renderProducts(products);
-
-
-        document.getElementById(
-            "totalProducts"
-        ).textContent =
-            products.length;
-
-
-        document.getElementById(
-            "availableProducts"
-        ).textContent =
-            products.filter(
-                product =>
-                    product.available === true
-            ).length;
-
-    }
-    catch (error) {
-
-        console.error(
-            "Load products error:",
-            error
-        );
-
-
-        container.innerHTML = `
-            <div class="empty">
-
-                <h3>
-                    Failed to load products
-                </h3>
-
-                <p>
-                    Please make sure the backend is running.
-                </p>
-
-                <br>
-
-                <button
-                    class="save-btn"
-                    onclick="loadProducts()"
-                >
-                    Retry
-                </button>
-
-            </div>
-        `;
-
-    }
-
-}
-
-
-// ========================================
-// RENDER PRODUCTS
-// ========================================
-
-function renderProducts(products) {
-
-    const container =
-        document.getElementById(
-            "products"
-        );
-
-    const searchInput =
-        document.getElementById("productSearch");
-
-    const searchResult =
-        document.getElementById("searchResult");
-
-    if (searchResult && searchInput) {
-
-        const term = searchInput.value.trim();
-
-        searchResult.textContent = term
-            ? `${products.length} product${products.length === 1 ? "" : "s"} found`
-            : "";
-
-    }
-
-
-    if (products.length === 0) {
-
-        container.innerHTML = `
-            <div class="empty">
-
-                <h3>
-                    No matching products.
-                </h3>
-
-                <p>
-                    Try a different search or click "+ Add Product" to add a food item.
-                </p>
-
-            </div>
-        `;
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        products.map(
-            product => {
-
-                const safeName =
-                    escapeHtml(
-                        product.name || ""
-                    );
-
-
-                const safeImage =
-                    escapeHtml(
-                        product.image || ""
-                    );
-
-
-                const price =
-                    Number(
-                        product.price || 0
-                    );
-
-
-                let imageHTML = "";
-
-
-                if (safeImage) {
-
-                    imageHTML = `
-                        <img
-                            src="${safeImage}"
-                            class="product-image"
-                            alt="${safeName}"
-                            onerror="this.onerror=null; this.parentElement.innerHTML='<div class=&quot;no-image&quot;>Image unavailable</div>'"
-                        >
-                    `;
-
-                }
-                else {
-
-                    imageHTML = `
-                        <div class="no-image">
-                            No Image
-                        </div>
-                    `;
-
-                }
-
-
-                return `
-                    <div class="product-card">
-
-                        ${imageHTML}
-
-                        <div class="product-info">
-
-                            <h3>
-                                ${safeName}
-                            </h3>
-
-
-                            <div class="price">
-                                ₹${price.toFixed(2)}
-                            </div>
-
-
-                            <div class="${
-                                product.available
-                                    ? "available"
-                                    : "unavailable"
-                            }">
-
-                                ${
-                                    product.available
-                                        ? "✓ Available"
-                                        : "✕ Unavailable"
-                                }
-
-                            </div>
-
-
-                            <div class="actions">
-
-                                <button
-                                    class="edit-btn"
-                                    onclick="editProductById('${product._id}')"
-                                >
-                                    ✏️ Edit
-                                </button>
-
-
-                                <button
-                                    class="delete-btn"
-                                    onclick="deleteProduct('${product._id}')"
-                                >
-                                    🗑️ Delete
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                `;
-
-            }
-        ).join("");
-
-}
-
-
-// ========================================
-// EDIT PRODUCT
-// ========================================
-
-async function editProductById(id) {
-
-    try {
-
-        const response =
-            await fetch(
-                `${API}/products`
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Failed to load product"
-            );
-
-        }
-
-
-        const products =
-            await response.json();
-
-
-        const product =
-            products.find(
-                item =>
-                    String(item._id) ===
-                    String(id)
-            );
-
-
-        if (!product) {
-
-            alert(
-                "Product not found."
-            );
-
-            return;
-
-        }
-
-
-        editProduct(product);
-
-    }
-    catch (error) {
-
-        console.error(
-            "Edit product error:",
-            error
-        );
-
-        alert(
-            "Could not load product."
-        );
-
-    }
-
-}
-
-
-// ========================================
-// SHOW ADD FORM
-// ========================================
-
-function showAddForm() {
-
-    editingProductId = null;
-
-
-    document.getElementById(
-        "formTitle"
-    ).textContent =
-        "Add Product";
-
-
-    document.getElementById(
-        "productName"
-    ).value = "";
-
-
-    document.getElementById(
-        "productPrice"
-    ).value = "";
-
-
-    document.getElementById(
-        "productImage"
-    ).value = "";
-
-
-    document.getElementById(
-        "productAvailable"
-    ).checked = true;
-
-
-    document.getElementById(
-        "saveProductButton"
-    ).textContent =
-        "Save Product";
-
-
-    document.getElementById(
-        "productForm"
-    ).classList.add(
-        "active"
-    );
-
-
-    document.getElementById(
-        "productName"
-    ).focus();
-
-}
-
-
-// ========================================
-// EDIT FORM
-// ========================================
-
-function editProduct(product) {
-
-    editingProductId =
-        product._id;
-
-
-    document.getElementById(
-        "formTitle"
-    ).textContent =
-        "Edit Product";
-
-
-    document.getElementById(
-        "productName"
-    ).value =
-        product.name || "";
-
-
-    document.getElementById(
-        "productPrice"
-    ).value =
-        product.price ?? "";
-
-
-    document.getElementById(
-        "productImage"
-    ).value =
-        product.image || "";
-
-
-    document.getElementById(
-        "productAvailable"
-    ).checked =
-        product.available !== false;
-
-
-    document.getElementById(
-        "saveProductButton"
-    ).textContent =
-        "Update Product";
-
-
-    document.getElementById(
-        "productForm"
-    ).classList.add(
-        "active"
-    );
-
-
-    document.getElementById(
-        "productName"
-    ).focus();
-
-}
-
-
-// ========================================
-// SAVE / UPDATE PRODUCT
-// ========================================
-
-async function saveProduct() {
-
-    const name =
-        document.getElementById(
-            "productName"
-        ).value.trim();
-
-
-    const priceValue =
-        document.getElementById(
-            "productPrice"
-        ).value;
-
-
-    const image =
-        document.getElementById(
-            "productImage"
-        ).value.trim();
-
-
-    const available =
-        document.getElementById(
-            "productAvailable"
-        ).checked;
-
-
-    if (!name) {
-
-        alert(
-            "Enter product name."
-        );
-
-        return;
-
-    }
-
-
-    if (
-        priceValue === "" ||
-        Number.isNaN(
-            Number(priceValue)
-        ) ||
-        Number(priceValue) < 0
-    ) {
-
-        alert(
-            "Enter a valid price."
-        );
-
-        return;
-
-    }
-
-
-    const price =
-        Number(priceValue);
-
-
-    const data = {
-
-        name,
-        price,
-        image,
-        available
-
-    };
-
-
-    const button =
-        document.getElementById(
-            "saveProductButton"
-        );
-
-
-    button.disabled = true;
-
-    button.textContent =
-        editingProductId
-            ? "Updating..."
-            : "Saving...";
-
-
-    try {
-
-        const url =
-            editingProductId
-                ? `${API}/products/${editingProductId}`
-                : `${API}/products`;
-
-
-        const method =
-            editingProductId
-                ? "PUT"
-                : "POST";
-
-
-        const response =
-            await fetch(
-                url,
-                {
-                    method,
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json",
-
-                        "Authorization":
-                            `Bearer ${adminToken}`
-
-                    },
-
-                    body:
-                        JSON.stringify(data)
-
-                }
-            );
-
-
-        if (response.status === 401) {
-
-            handleUnauthorized();
-
-            return;
-
-        }
-
-
-        const result =
-            await response.json();
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                result.message ||
-                "Failed to save product."
-            );
-
-        }
-
-
-        showNotification(
-            editingProductId
-                ? "Product updated successfully!"
-                : "Product added successfully!"
-        );
-
-
-        cancelForm();
-
-
-        await loadProducts();
-
-    }
-    catch (error) {
-
-        console.error(
-            "Save product error:",
-            error
-        );
-
-
-        alert(
-            error.message ||
-            "Cannot connect to backend."
-        );
-
-    }
-    finally {
-
-        button.disabled = false;
-
-        button.textContent =
-            editingProductId
-                ? "Update Product"
-                : "Save Product";
-
-    }
-
-}
-
-
-// ========================================
-// DELETE PRODUCT
-// ========================================
-
-async function deleteProduct(id) {
-
-    const confirmed =
-        confirm(
-            "Are you sure you want to delete this product?"
-        );
-
-
-    if (!confirmed) {
-
-        return;
-
-    }
-
-
-    try {
-
-        const response =
-            await fetch(
-                `${API}/products/${id}`,
-                {
-                    method: "DELETE",
-
-                    headers: {
-                        "Authorization":
-                            `Bearer ${adminToken}`
-                    }
-                }
-            );
-
-
-        if (response.status === 401) {
-
-            handleUnauthorized();
-
-            return;
-
-        }
-
-
-        const result =
-            await response.json();
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                result.message ||
-                "Failed to delete product."
-            );
-
-        }
-
-
-        showNotification(
-            "Product deleted successfully!"
-        );
-
-
-        await loadProducts();
-
-    }
-    catch (error) {
-
-        console.error(
-            "Delete product error:",
-            error
-        );
-
-
-        alert(
-            error.message ||
-            "Cannot connect to backend."
-        );
-
-    }
-
-}
-
-
-// ========================================
-// CANCEL FORM
-// ========================================
-
-function cancelForm() {
-
-    editingProductId = null;
-
-
-    document.getElementById(
-        "productForm"
-    ).classList.remove(
-        "active"
-    );
-
-
-    document.getElementById(
-        "productName"
-    ).value = "";
-
-
-    document.getElementById(
-        "productPrice"
-    ).value = "";
-
-
-    document.getElementById(
-        "productImage"
-    ).value = "";
-
-
-    document.getElementById(
-        "productAvailable"
-    ).checked = true;
-
-
-    document.getElementById(
-        "saveProductButton"
-    ).textContent =
-        "Save Product";
-
-}
-
-
-// ========================================
-// LOAD ORDER STATS
-// ========================================
-
-async function loadOrderStats() {
-
-    try {
-
-        const response =
-            await fetch(
-                `${API}/orders`,
-                {
-                    method: "GET",
-
-                    headers: {
-                        "Authorization":
-                            `Bearer ${adminToken}`
-                    }
-                }
-            );
-
-
-        if (response.status === 401) {
-
-            handleUnauthorized();
-
-            return;
-
-        }
-
-
-        if (!response.ok) {
-
-            return;
-
-        }
-
-
-        const orders =
-            await response.json();
-
-
-        const pending =
-            orders.filter(
-                order =>
-                    order.status === "Pending"
-            ).length;
-
-
-        document.getElementById(
-            "pendingOrders"
-        ).textContent =
-            pending;
-
-    }
-    catch (error) {
-
-        console.error(
-            "Order stats error:",
-            error
-        );
-
-    }
-
-}
-
-
-// ========================================
-// GO TO ORDERS
-// ========================================
-
-function goOrders() {
-
-    window.location.href =
-        "orders.html";
-
-}
-
-
-// ========================================
-// LOGOUT
-// ========================================
-
-async function logout() {
-
-    try {
-
-        await fetch(
-            `${API}/admin/logout`,
-            {
-                method: "POST",
-
-                headers: {
-                    "Authorization":
-                        `Bearer ${adminToken}`
-                }
-            }
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            "Logout error:",
-            error
+        /*
+            Check orders every 5 seconds.
+            This keeps Pending Orders updated.
+        */
+
+        setInterval(
+            loadOrderStats,
+            5000
         );
 
     }
 
 
-    localStorage.removeItem(
-        TOKEN_KEY
-    );
-
-
-    window.location.replace(
-        "login.html"
-    );
-
-}
-
-
-// ========================================
-// HANDLE UNAUTHORIZED
-// ========================================
-
-function handleUnauthorized() {
-
-    localStorage.removeItem(
-        TOKEN_KEY
-    );
-
-
-    adminToken = null;
-
-
-    window.location.replace(
-        "login.html"
-    );
-
-}
-
-
-// ========================================
-// NOTIFICATION
-// ========================================
-
-function showNotification(
-    message,
-    error = false
-) {
-
-    const box =
-        document.getElementById(
-            "notification"
-        );
-
-
-    box.textContent =
-        message;
-
-
-    box.style.background =
-        error
-            ? "#e53935"
-            : "#2e7d32";
-
-
-    box.style.display =
-        "block";
-
-
-    setTimeout(
-        function () {
-
-            box.style.display =
-                "none";
-
-        },
-        3000
-    );
-
-}
-
-
-// ========================================
-// ESCAPE HTML
-// ========================================
-
-function escapeHtml(value) {
-
-    return String(value)
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
-}
-
-
-// ========================================
-// REFRESH ORDER COUNT
-// ========================================
-
-setInterval(
-    function () {
-
-        if (
-            localStorage.getItem(
-                TOKEN_KEY
-            )
-        ) {
-
-            loadOrderStats();
-
-        }
-
-    },
-    5000
-);
+    startDashboard();
 
 </script>
 
