@@ -1,731 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Shams Food Stall - Admin Dashboard</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Shams Restaurant - Admin</title>
+
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f5f5;
-            color: #222;
+            background: #f5f7fb;
         }
 
-        button,
-        input {
-            font-family: inherit;
+
+        .navbar-brand {
+            font-weight: 700;
         }
 
-        button {
-            border: none;
-            cursor: pointer;
+
+        .dashboard-title {
+            font-weight: 700;
         }
 
-        /* =========================
-           HEADER
-        ========================= */
-
-        header {
-            background: #111;
-            color: white;
-            padding: 18px 30px;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        header h1 {
-            font-size: 24px;
-        }
-
-        .header-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .orders-btn {
-            background: #ff9800;
-            color: white;
-            padding: 11px 18px;
-            border-radius: 7px;
-            font-weight: bold;
-        }
-
-        .orders-btn:hover {
-            background: #f57c00;
-        }
-
-        .logout-btn {
-            background: #e53935;
-            color: white;
-            padding: 11px 18px;
-            border-radius: 7px;
-            font-weight: bold;
-        }
-
-        .logout-btn:hover {
-            background: #c62828;
-        }
-
-        /* =========================
-           MAIN CONTAINER
-        ========================= */
-
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .welcome {
-            margin-bottom: 25px;
-        }
-
-        .welcome h2 {
-            margin-bottom: 6px;
-        }
-
-        .welcome p {
-            color: #666;
-        }
-
-        /* =========================
-           STATS
-        ========================= */
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .stat-card h3 {
-            color: #777;
-            font-size: 15px;
-            margin-bottom: 10px;
-        }
-
-        .stat-card p {
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        /* =========================
-           SECTION
-        ========================= */
-
-        .section {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            margin-bottom: 20px;
-        }
-
-        .section-header h2 {
-            font-size: 22px;
-        }
-
-        .add-btn {
-            background: #2e7d32;
-            color: white;
-
-            padding: 11px 18px;
-            border-radius: 7px;
-
-            font-weight: bold;
-        }
-
-        .add-btn:hover {
-            background: #1b5e20;
-        }
-
-        /* =========================
-           PRODUCT FORM
-        ========================= */
-
-        .product-form {
-            display: none;
-
-            background: #f7f7f7;
-            padding: 20px;
-
-            border-radius: 8px;
-            margin-bottom: 25px;
-
-            border: 1px solid #ddd;
-        }
-
-        .product-form.active {
-            display: block;
-        }
-
-        .product-form h3 {
-            margin-bottom: 20px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 2fr;
-            gap: 15px;
-        }
-
-        .form-group label {
-            display: block;
-
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type="url"] {
-            width: 100%;
-
-            padding: 12px;
-
-            border: 1px solid #ccc;
-            border-radius: 6px;
-
-            font-size: 15px;
-            outline: none;
-        }
-
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        input[type="url"]:focus {
-            border-color: #1976d2;
-        }
-
-        .availability {
-            margin: 18px 0;
-        }
-
-        .availability label {
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .availability input {
-            margin-right: 7px;
-        }
-
-        .save-btn {
-            background: #1976d2;
-            color: white;
-
-            padding: 11px 18px;
-            border-radius: 6px;
-
-            font-weight: bold;
-        }
-
-        .save-btn:hover {
-            background: #1565c0;
-        }
-
-        .cancel-btn {
-            background: #777;
-            color: white;
-
-            padding: 11px 18px;
-            border-radius: 6px;
-
-            font-weight: bold;
-            margin-left: 6px;
-        }
-
-        .cancel-btn:hover {
-            background: #555;
-        }
-
-        /* =========================
-           PRODUCTS
-        ========================= */
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
 
         .product-card {
-            background: white;
-
-            border: 1px solid #ddd;
-            border-radius: 10px;
-
+            border: none;
+            border-radius: 14px;
             overflow: hidden;
-
-            transition: transform 0.15s ease,
-                        box-shadow 0.15s ease;
+            transition: 0.2s;
         }
+
 
         .product-card:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 5px 15px rgba(0, 0, 0, 0.10);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.10) !important;
         }
+
 
         .product-image {
             width: 100%;
-            height: 180px;
-
+            height: 220px;
             object-fit: cover;
-
-            display: block;
-
-            background: #eee;
+            background: #e9ecef;
         }
+
 
         .no-image {
-            height: 180px;
-
-            background: #eee;
+            width: 100%;
+            height: 220px;
+            background: #e9ecef;
 
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
 
-            color: #888;
-            font-weight: bold;
+            color: #6c757d;
+            font-size: 18px;
         }
 
-        .product-info {
-            padding: 15px;
-        }
-
-        .product-info h3 {
-            margin-bottom: 8px;
-            font-size: 19px;
-        }
 
         .price {
-            font-size: 19px;
-            font-weight: bold;
-
-            margin-bottom: 8px;
+            font-size: 22px;
+            font-weight: 700;
+            color: #0d6efd;
         }
 
-        .available {
-            color: #2e7d32;
-            font-weight: bold;
+
+        .status-badge {
+            font-size: 13px;
         }
 
-        .unavailable {
-            color: #e53935;
-            font-weight: bold;
+
+        .modal-content {
+            border: none;
+            border-radius: 15px;
         }
 
-        .actions {
-            display: flex;
-            gap: 8px;
 
-            margin-top: 15px;
-        }
-
-        .edit-btn,
-        .delete-btn {
-            flex: 1;
-
-            padding: 10px;
-
-            border-radius: 6px;
-
+        .modal-header {
+            background: #212529;
             color: white;
-            font-weight: bold;
         }
 
-        .edit-btn {
-            background: #1976d2;
+
+        .form-control,
+        .form-check-input {
+            cursor: pointer;
         }
 
-        .edit-btn:hover {
-            background: #1565c0;
+
+        #image-preview {
+            display: none;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 10px;
         }
 
-        .delete-btn {
-            background: #e53935;
-        }
-
-        .delete-btn:hover {
-            background: #c62828;
-        }
-
-        /* =========================
-           EMPTY / LOADING
-        ========================= */
-
-        .empty {
-            text-align: center;
-
-            padding: 50px 20px;
-
-            color: #777;
-
-            grid-column: 1 / -1;
-        }
-
-        .empty h3 {
-            margin-bottom: 8px;
-            color: #555;
-        }
 
         .loading {
+            padding: 60px;
             text-align: center;
-
-            padding: 50px 20px;
-
-            color: #777;
-
-            grid-column: 1 / -1;
         }
 
-        /* =========================
-           NOTIFICATION
-        ========================= */
 
-        .notification {
-            display: none;
+        /* SEARCH BOX */
 
-            position: fixed;
-
-            right: 20px;
-            top: 20px;
-
-            padding: 15px 20px;
-
-            color: white;
-
-            border-radius: 8px;
-
-            z-index: 9999;
-
-            box-shadow:
-                0 5px 20px rgba(0, 0, 0, 0.2);
-
-            font-weight: bold;
-
-            max-width: 350px;
+        .search-box {
+            max-width: 500px;
+            width: 100%;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
 
-        @media (max-width: 900px) {
-
-            .products {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
+        .search-box .input-group-text {
+            background: white;
+            border-right: 0;
         }
 
-        @media (max-width: 600px) {
 
-            header {
+        .search-box input {
+            border-left: 0;
+            box-shadow: none !important;
+        }
+
+
+        .search-box input:focus {
+            border-color: #dee2e6;
+        }
+
+
+        .search-result-text {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+
+        @media (max-width: 768px) {
+
+            .top-header {
                 flex-direction: column;
-                gap: 15px;
-
-                text-align: center;
-            }
-
-            .header-buttons {
-                width: 100%;
-            }
-
-            .header-buttons button {
-                flex: 1;
-            }
-
-            .products {
-                grid-template-columns: 1fr;
-            }
-
-            .section {
-                padding: 18px;
-            }
-
-            .section-header {
-                flex-direction: column;
-                align-items: stretch;
+                align-items: stretch !important;
                 gap: 15px;
             }
 
-            .add-btn {
-                width: 100%;
+            .search-box {
+                max-width: 100%;
             }
 
-            .container {
-                padding: 0 12px;
-            }
-
-            .product-form {
-                padding: 15px;
-            }
-
-            .actions {
-                flex-direction: column;
-            }
-
-            .cancel-btn {
-                margin-left: 0;
-                margin-top: 5px;
-            }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-<header>
 
-    <h1>🍔 Shams Food Stall</h1>
+<!-- ========================================= -->
+<!-- NAVBAR -->
+<!-- ========================================= -->
 
-    <div class="header-buttons">
+<nav class="navbar navbar-dark bg-dark shadow-sm">
+
+    <div class="container">
+
+        <span class="navbar-brand">
+            🍔 Shams Restaurant
+        </span>
+
+
+        <span class="text-white">
+            Admin Dashboard
+        </span>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ========================================= -->
+<!-- MAIN -->
+<!-- ========================================= -->
+
+<main class="container py-5">
+
+
+    <!-- HEADER -->
+
+    <div
+        class="d-flex justify-content-between align-items-center mb-4 top-header"
+    >
+
+        <div>
+
+            <h1 class="dashboard-title">
+                Products
+            </h1>
+
+            <p class="text-muted mb-0">
+                Manage your restaurant menu
+            </p>
+
+        </div>
+
 
         <button
-            class="orders-btn"
-            onclick="goOrders()"
+            class="btn btn-primary"
+            onclick="openAddModal()"
         >
-            📦 Orders
-        </button>
 
-        <button
-            class="logout-btn"
-            onclick="logout()"
-        >
-            Logout
+            + Add Product
+
         </button>
 
     </div>
 
-</header>
 
 
-<div class="container">
+    <!-- ========================================= -->
+    <!-- SEARCH -->
+    <!-- ========================================= -->
 
-    <div class="welcome">
+    <div class="card border-0 shadow-sm mb-4">
 
-        <h2>Admin Dashboard</h2>
+        <div class="card-body">
 
-        <p>
-            Manage your food stall products and orders.
-        </p>
+            <div class="search-box">
 
-    </div>
-
-
-    <!-- =========================
-         STATS
-    ========================== -->
-
-    <div class="stats">
-
-        <div class="stat-card">
-
-            <h3>Total Products</h3>
-
-            <p id="totalProducts">
-                0
-            </p>
-
-        </div>
+                <label
+                    for="product-search"
+                    class="form-label fw-semibold"
+                >
+                    🔍 Search Products
+                </label>
 
 
-        <div class="stat-card">
+                <div class="input-group">
 
-            <h3>Available Products</h3>
+                    <span class="input-group-text">
+                        🔍
+                    </span>
 
-            <p id="availableProducts">
-                0
-            </p>
+                    <input
+                        type="text"
+                        id="product-search"
+                        class="form-control"
+                        placeholder="Search by product name..."
+                        autocomplete="off"
+                    >
 
-        </div>
+                </div>
 
 
-        <div class="stat-card">
+                <div
+                    id="search-result-text"
+                    class="search-result-text mt-2"
+                ></div>
 
-            <h3>Pending Orders</h3>
-
-            <p id="pendingOrders">
-                0
-            </p>
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- =========================
-         PRODUCTS SECTION
-    ========================== -->
 
-    <div class="section">
+    <!-- ========================================= -->
+    <!-- PRODUCTS -->
+    <!-- ========================================= -->
 
-        <div class="section-header">
+    <div
+        id="products-container"
+        class="row g-4"
+    >
 
-            <h2>
-                🍽️ Products
-            </h2>
+        <div class="loading">
 
-            <button
-                class="add-btn"
-                onclick="showAddForm()"
-            >
-                + Add Product
-            </button>
+            <div
+                class="spinner-border text-primary"
+                role="status"
+            ></div>
+
+            <p class="mt-3">
+                Loading products...
+            </p>
 
         </div>
 
-
-        <!-- PRODUCT FORM -->
-
-        <div
-            id="productForm"
-            class="product-form"
-        >
-
-            <h3 id="formTitle">
-                Add Product
-            </h3>
+    </div>
 
 
-            <div class="form-grid">
+</main>
 
-                <div class="form-group">
 
-                    <label for="productName">
+
+<!-- ========================================= -->
+<!-- ADD / EDIT MODAL -->
+<!-- ========================================= -->
+
+<div
+    class="modal fade"
+    id="productModal"
+    tabindex="-1"
+>
+
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+
+
+            <!-- HEADER -->
+
+            <div class="modal-header">
+
+                <h5
+                    class="modal-title"
+                    id="modalTitle"
+                >
+                    Add New Product
+                </h5>
+
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+
+
+            <!-- BODY -->
+
+            <div class="modal-body">
+
+
+                <!-- Product ID -->
+
+                <input
+                    type="hidden"
+                    id="product-id"
+                >
+
+
+                <!-- NAME -->
+
+                <div class="mb-3">
+
+                    <label
+                        class="form-label fw-semibold"
+                    >
                         Product Name
                     </label>
 
                     <input
                         type="text"
-                        id="productName"
-                        placeholder="Chicken Biryani"
-                        autocomplete="off"
+                        class="form-control"
+                        id="product-name"
+                        placeholder="Example: Chicken Burger"
+                        required
                     >
 
                 </div>
 
 
-                <div class="form-group">
 
-                    <label for="productPrice">
-                        Price (₹)
+                <!-- PRICE -->
+
+                <div class="mb-3">
+
+                    <label
+                        class="form-label fw-semibold"
+                    >
+                        Price
                     </label>
 
-                    <input
-                        type="number"
-                        id="productPrice"
-                        min="0"
-                        step="0.01"
-                        placeholder="150"
-                    >
+                    <div class="input-group">
+
+                        <span class="input-group-text">
+                            ₹
+                        </span>
+
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="product-price"
+                            placeholder="120"
+                            min="0"
+                            required
+                        >
+
+                    </div>
 
                 </div>
 
 
-                <div class="form-group">
 
-                    <label for="productImage">
+                <!-- IMAGE -->
+
+                <div class="mb-3">
+
+                    <label
+                        class="form-label fw-semibold"
+                    >
                         Image URL
                     </label>
 
                     <input
                         type="url"
-                        id="productImage"
+                        class="form-control"
+                        id="product-image"
                         placeholder="https://example.com/image.jpg"
-                        autocomplete="off"
+                        oninput="previewImage()"
+                    >
+
+
+                    <img
+                        id="image-preview"
+                        alt="Image Preview"
                     >
 
                 </div>
 
-            </div>
 
 
-            <div class="availability">
+                <!-- AVAILABLE -->
 
-                <label>
+                <div class="form-check mb-3">
 
                     <input
+                        class="form-check-input"
                         type="checkbox"
-                        id="productAvailable"
+                        id="product-available"
                         checked
                     >
 
-                    Product Available
+                    <label
+                        class="form-check-label"
+                        for="product-available"
+                    >
 
-                </label>
+                        Product Available
+
+                    </label>
+
+                </div>
+
 
             </div>
 
 
-            <button
-                class="save-btn"
-                id="saveProductButton"
-                onclick="saveProduct()"
-            >
-                Save Product
-            </button>
+
+            <!-- FOOTER -->
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+
+                    Cancel
+
+                </button>
 
 
-            <button
-                class="cancel-btn"
-                onclick="cancelForm()"
-            >
-                Cancel
-            </button>
+                <button
+                    type="button"
+                    class="btn btn-success"
+                    onclick="saveProduct()"
+                >
 
-        </div>
+                    Save Product
 
+                </button>
 
-        <!-- PRODUCTS -->
-
-        <div
-            id="products"
-            class="products"
-        >
-
-            <div class="loading">
-                Loading products...
             </div>
+
 
         </div>
 
@@ -734,162 +504,136 @@
 </div>
 
 
-<!-- =========================
-     NOTIFICATION
-========================== -->
 
-<div
-    id="notification"
-    class="notification"
-></div>
+<!-- ========================================= -->
+<!-- BOOTSTRAP JS -->
+<!-- ========================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
 
 
 <script>
 
-const API = "/api";
+
+// =========================================
+// API
+// =========================================
+
+const API_URL = "/api/products";
+
+
+// =========================================
+// ADMIN TOKEN
+// =========================================
 
 const TOKEN_KEY = "adminToken";
 
-let adminToken =
-    localStorage.getItem(TOKEN_KEY);
 
-let editingProductId = null;
+function getToken() {
 
+    return localStorage.getItem(TOKEN_KEY);
 
-// ========================================
-// START
-// ========================================
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        checkAdminSession();
-
-    }
-);
+}
 
 
-// ========================================
-// CHECK ADMIN SESSION
-// ========================================
+function getAuthHeaders() {
 
-async function checkAdminSession() {
+    const token = getToken();
 
-    adminToken =
-        localStorage.getItem(TOKEN_KEY);
+    return {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+    };
+
+}
 
 
-    if (!adminToken) {
+// =========================================
+// GLOBAL VARIABLES
+// =========================================
 
-        window.location.replace(
-            "login.html"
-        );
+let productModal;
 
-        return;
+let allProducts = [];
+
+
+
+// =========================================
+// CHECK ADMIN LOGIN
+// =========================================
+
+async function checkAdminLogin() {
+
+    const token = getToken();
+
+    if (!token) {
+
+        window.location.href = "login.html";
+
+        return false;
 
     }
 
 
     try {
 
-        const response =
-            await fetch(
-                `${API}/admin/check`,
-                {
-                    method: "GET",
-
-                    headers: {
-                        "Authorization":
-                            `Bearer ${adminToken}`
-                    }
+        const response = await fetch(
+            "/api/admin/check",
+            {
+                headers: {
+                    "Authorization":
+                        `Bearer ${token}`
                 }
-            );
-
-
-        if (response.status === 401) {
-
-            localStorage.removeItem(
-                TOKEN_KEY
-            );
-
-            window.location.replace(
-                "login.html"
-            );
-
-            return;
-
-        }
+            }
+        );
 
 
         if (!response.ok) {
 
-            showNotification(
-                "Unable to verify admin session.",
-                true
-            );
+            localStorage.removeItem(TOKEN_KEY);
 
-            return;
+            window.location.href =
+                "login.html";
+
+            return false;
 
         }
 
 
-        await loadProducts();
+        return true;
 
-        await loadOrderStats();
 
-    }
-    catch (error) {
+    } catch (error) {
 
-        console.error(
-            "Session check error:",
-            error
-        );
+        console.error(error);
 
-        showNotification(
-            "Cannot connect to backend.",
-            true
-        );
+        return false;
 
     }
 
 }
 
 
-// ========================================
+
+// =========================================
 // LOAD PRODUCTS
-// ========================================
+// =========================================
 
 async function loadProducts() {
 
     const container =
         document.getElementById(
-            "products"
+            "products-container"
         );
-
-
-    container.innerHTML = `
-        <div class="loading">
-            Loading products...
-        </div>
-    `;
 
 
     try {
 
         const response =
-            await fetch(
-                `${API}/products`
-            );
-
-
-        if (response.status === 401) {
-
-            handleUnauthorized();
-
-            return;
-
-        }
+            await fetch(API_URL);
 
 
         if (!response.ok) {
@@ -901,66 +645,36 @@ async function loadProducts() {
         }
 
 
-        const products =
+        allProducts =
             await response.json();
 
 
-        if (!Array.isArray(products)) {
-
-            throw new Error(
-                "Invalid products response"
-            );
-
-        }
-
-
-        renderProducts(products);
-
-
-        document.getElementById(
-            "totalProducts"
-        ).textContent =
-            products.length;
-
-
-        document.getElementById(
-            "availableProducts"
-        ).textContent =
-            products.filter(
-                product =>
-                    product.available === true
-            ).length;
-
-    }
-    catch (error) {
-
-        console.error(
-            "Load products error:",
-            error
+        renderProducts(
+            allProducts
         );
 
 
+    } catch (error) {
+
+        console.error(error);
+
+
         container.innerHTML = `
-            <div class="empty">
 
-                <h3>
-                    Failed to load products
-                </h3>
+            <div class="col-12">
 
-                <p>
-                    Please make sure the backend is running.
-                </p>
+                <div class="alert alert-danger">
 
-                <br>
+                    ❌ Could not load products.
 
-                <button
-                    class="save-btn"
-                    onclick="loadProducts()"
-                >
-                    Retry
-                </button>
+                    <br>
+
+                    Please refresh the page.
+
+                </div>
 
             </div>
+
         `;
 
     }
@@ -968,32 +682,52 @@ async function loadProducts() {
 }
 
 
-// ========================================
+
+// =========================================
 // RENDER PRODUCTS
-// ========================================
+// =========================================
 
 function renderProducts(products) {
 
     const container =
         document.getElementById(
-            "products"
+            "products-container"
         );
 
 
-    if (products.length === 0) {
+    const resultText =
+        document.getElementById(
+            "search-result-text"
+        );
+
+
+    container.innerHTML = "";
+
+
+    // NO PRODUCTS AT ALL
+
+    if (allProducts.length === 0) {
+
+        resultText.textContent = "";
 
         container.innerHTML = `
-            <div class="empty">
 
-                <h3>
-                    No products yet.
-                </h3>
+            <div class="col-12">
 
-                <p>
-                    Click "+ Add Product" to add your first food item.
-                </p>
+                <div class="alert alert-info text-center">
+
+                    No products found.
+
+                    <br>
+
+                    Click
+                    <strong>+ Add Product</strong>
+                    to create your first product.
+
+                </div>
 
             </div>
+
         `;
 
         return;
@@ -1001,330 +735,395 @@ function renderProducts(products) {
     }
 
 
-    container.innerHTML =
-        products.map(
-            product => {
+    // SEARCH RESULT COUNT
 
-                const safeName =
-                    escapeHtml(
-                        product.name || ""
-                    );
+    const searchInput =
+        document.getElementById(
+            "product-search"
+        ).value.trim();
 
 
-                const safeImage =
-                    escapeHtml(
-                        product.image || ""
-                    );
+    if (searchInput) {
+
+        resultText.textContent =
+            `${products.length} product${
+                products.length === 1
+                    ? ""
+                    : "s"
+            } found`;
+
+    } else {
+
+        resultText.textContent =
+            `${products.length} product${
+                products.length === 1
+                    ? ""
+                    : "s"
+            }`;
+
+    }
 
 
-                const price =
-                    Number(
-                        product.price || 0
-                    );
+    // NO SEARCH MATCH
+
+    if (products.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="col-12">
+
+                <div class="alert alert-warning text-center">
+
+                    🔍 No products match
+
+                    <strong>
+                        "${escapeHTML(searchInput)}"
+                    </strong>
+
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
 
 
-                let imageHTML = "";
+    // CREATE PRODUCT CARDS
+
+    products.forEach(function(product) {
+
+        const productDiv =
+            document.createElement(
+                "div"
+            );
 
 
-                if (safeImage) {
-
-                    imageHTML = `
-                        <img
-                            src="${safeImage}"
-                            class="product-image"
-                            alt="${safeName}"
-                            onerror="this.onerror=null; this.parentElement.innerHTML='<div class=&quot;no-image&quot;>Image unavailable</div>'"
-                        >
-                    `;
-
-                }
-                else {
-
-                    imageHTML = `
-                        <div class="no-image">
-                            No Image
-                        </div>
-                    `;
-
-                }
+        productDiv.className =
+            "col-md-6 col-lg-4";
 
 
-                return `
-                    <div class="product-card">
+        const imageHTML =
+            product.image
 
-                        ${imageHTML}
+                ? `
 
-                        <div class="product-info">
+                    <img
+                        src="${escapeAttribute(product.image)}"
+                        class="product-image"
+                        alt="${escapeAttribute(product.name)}"
+                        onerror="
+                            this.style.display='none';
+                            this.nextElementSibling.style.display='flex';
+                        "
+                    >
 
-                            <h3>
-                                ${safeName}
-                            </h3>
+                    <div
+                        class="no-image"
+                        style="display:none;"
+                    >
 
-
-                            <div class="price">
-                                ₹${price.toFixed(2)}
-                            </div>
-
-
-                            <div class="${
-                                product.available
-                                    ? "available"
-                                    : "unavailable"
-                            }">
-
-                                ${
-                                    product.available
-                                        ? "✓ Available"
-                                        : "✕ Unavailable"
-                                }
-
-                            </div>
-
-
-                            <div class="actions">
-
-                                <button
-                                    class="edit-btn"
-                                    onclick="editProductById('${product._id}')"
-                                >
-                                    ✏️ Edit
-                                </button>
-
-
-                                <button
-                                    class="delete-btn"
-                                    onclick="deleteProduct('${product._id}')"
-                                >
-                                    🗑️ Delete
-                                </button>
-
-                            </div>
-
-                        </div>
+                        🍔 Image unavailable
 
                     </div>
+
+                `
+
+                : `
+
+                    <div class="no-image">
+
+                        🍔 No Image
+
+                    </div>
+
                 `;
 
+
+        productDiv.innerHTML = `
+
+            <div class="card product-card shadow-sm h-100">
+
+
+                ${imageHTML}
+
+
+
+                <div class="card-body">
+
+
+                    <h4 class="card-title fw-bold">
+
+                        ${escapeHTML(product.name)}
+
+                    </h4>
+
+
+
+                    <div class="price mb-3">
+
+                        ₹${Number(product.price).toFixed(2)}
+
+                    </div>
+
+
+
+                    <div class="mb-3">
+
+                        <span class="text-muted">
+                            Status:
+                        </span>
+
+
+                        <span
+                            class="badge status-badge ${
+                                product.available
+                                    ? "bg-success"
+                                    : "bg-danger"
+                            }"
+                        >
+
+                            ${
+                                product.available
+                                    ? "Available"
+                                    : "Out of Stock"
+                            }
+
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="d-flex gap-2">
+
+
+                        <button
+                            class="btn btn-warning btn-sm"
+                            onclick='editProduct(${JSON.stringify(product)})'
+                        >
+
+                            ✏️ Edit
+
+                        </button>
+
+
+
+                        <button
+                            class="btn btn-danger btn-sm"
+                            onclick="deleteProduct('${product._id}')"
+                        >
+
+                            🗑️ Delete
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        container.appendChild(
+            productDiv
+        );
+
+    });
+
+}
+
+
+
+// =========================================
+// SEARCH
+// =========================================
+
+function searchProducts() {
+
+    const searchInput =
+        document.getElementById(
+            "product-search"
+        );
+
+
+    const searchTerm =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    const filteredProducts =
+        allProducts.filter(
+            function(product) {
+
+                return product.name
+                    .toLowerCase()
+                    .includes(searchTerm);
+
             }
-        ).join("");
+        );
+
+
+    renderProducts(
+        filteredProducts
+    );
 
 }
 
 
-// ========================================
-// EDIT PRODUCT
-// ========================================
 
-async function editProductById(id) {
+// =========================================
+// OPEN ADD MODAL
+// =========================================
 
-    try {
-
-        const response =
-            await fetch(
-                `${API}/products`
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Failed to load product"
-            );
-
-        }
-
-
-        const products =
-            await response.json();
-
-
-        const product =
-            products.find(
-                item =>
-                    String(item._id) ===
-                    String(id)
-            );
-
-
-        if (!product) {
-
-            alert(
-                "Product not found."
-            );
-
-            return;
-
-        }
-
-
-        editProduct(product);
-
-    }
-    catch (error) {
-
-        console.error(
-            "Edit product error:",
-            error
-        );
-
-        alert(
-            "Could not load product."
-        );
-
-    }
-
-}
-
-
-// ========================================
-// SHOW ADD FORM
-// ========================================
-
-function showAddForm() {
-
-    editingProductId = null;
+function openAddModal() {
 
 
     document.getElementById(
-        "formTitle"
+        "modalTitle"
     ).textContent =
-        "Add Product";
+        "Add New Product";
 
 
     document.getElementById(
-        "productName"
+        "product-id"
     ).value = "";
 
 
     document.getElementById(
-        "productPrice"
+        "product-name"
     ).value = "";
 
 
     document.getElementById(
-        "productImage"
+        "product-price"
     ).value = "";
 
 
     document.getElementById(
-        "productAvailable"
+        "product-image"
+    ).value = "";
+
+
+    document.getElementById(
+        "product-available"
     ).checked = true;
 
 
     document.getElementById(
-        "saveProductButton"
-    ).textContent =
-        "Save Product";
+        "image-preview"
+    ).style.display = "none";
 
 
-    document.getElementById(
-        "productForm"
-    ).classList.add(
-        "active"
-    );
-
-
-    document.getElementById(
-        "productName"
-    ).focus();
+    productModal.show();
 
 }
 
 
-// ========================================
-// EDIT FORM
-// ========================================
+
+// =========================================
+// EDIT PRODUCT
+// =========================================
 
 function editProduct(product) {
 
-    editingProductId =
-        product._id;
-
 
     document.getElementById(
-        "formTitle"
+        "modalTitle"
     ).textContent =
         "Edit Product";
 
 
     document.getElementById(
-        "productName"
+        "product-id"
     ).value =
-        product.name || "";
+        product._id;
 
 
     document.getElementById(
-        "productPrice"
+        "product-name"
     ).value =
-        product.price ?? "";
+        product.name;
 
 
     document.getElementById(
-        "productImage"
+        "product-price"
+    ).value =
+        product.price;
+
+
+    document.getElementById(
+        "product-image"
     ).value =
         product.image || "";
 
 
     document.getElementById(
-        "productAvailable"
+        "product-available"
     ).checked =
-        product.available !== false;
+        product.available;
 
 
-    document.getElementById(
-        "saveProductButton"
-    ).textContent =
-        "Update Product";
+    previewImage();
 
 
-    document.getElementById(
-        "productForm"
-    ).classList.add(
-        "active"
-    );
-
-
-    document.getElementById(
-        "productName"
-    ).focus();
+    productModal.show();
 
 }
 
 
-// ========================================
-// SAVE / UPDATE PRODUCT
-// ========================================
+
+// =========================================
+// SAVE PRODUCT
+// =========================================
 
 async function saveProduct() {
 
+
+    const id =
+        document.getElementById(
+            "product-id"
+        ).value;
+
+
     const name =
         document.getElementById(
-            "productName"
+            "product-name"
         ).value.trim();
 
 
-    const priceValue =
+    const price =
         document.getElementById(
-            "productPrice"
+            "product-price"
         ).value;
 
 
     const image =
         document.getElementById(
-            "productImage"
+            "product-image"
         ).value.trim();
 
 
     const available =
         document.getElementById(
-            "productAvailable"
+            "product-available"
         ).checked;
 
+
+
+    // VALIDATION
 
     if (!name) {
 
         alert(
-            "Enter product name."
+            "Please enter a product name."
         );
 
         return;
@@ -1333,15 +1132,12 @@ async function saveProduct() {
 
 
     if (
-        priceValue === "" ||
-        Number.isNaN(
-            Number(priceValue)
-        ) ||
-        Number(priceValue) < 0
+        price === "" ||
+        Number(price) < 0
     ) {
 
         alert(
-            "Enter a valid price."
+            "Please enter a valid price."
         );
 
         return;
@@ -1349,140 +1145,150 @@ async function saveProduct() {
     }
 
 
-    const price =
-        Number(priceValue);
 
+    const productData = {
 
-    const data = {
+        name: name,
 
-        name,
-        price,
-        image,
-        available
+        price: Number(price),
+
+        image: image,
+
+        available: available
 
     };
 
 
-    const button =
-        document.getElementById(
-            "saveProductButton"
-        );
-
-
-    button.disabled = true;
-
-    button.textContent =
-        editingProductId
-            ? "Updating..."
-            : "Saving...";
-
 
     try {
 
-        const url =
-            editingProductId
-                ? `${API}/products/${editingProductId}`
-                : `${API}/products`;
+
+        let response;
 
 
-        const method =
-            editingProductId
-                ? "PUT"
-                : "POST";
+        // EDIT
 
+        if (id) {
 
-        const response =
-            await fetch(
-                url,
-                {
-                    method,
+            response =
+                await fetch(
+                    `${API_URL}/${id}`,
+                    {
+                        method: "PUT",
 
-                    headers: {
+                        headers:
+                            getAuthHeaders(),
 
-                        "Content-Type":
-                            "application/json",
-
-                        "Authorization":
-                            `Bearer ${adminToken}`
-
-                    },
-
-                    body:
-                        JSON.stringify(data)
-
-                }
-            );
-
-
-        if (response.status === 401) {
-
-            handleUnauthorized();
-
-            return;
+                        body:
+                            JSON.stringify(
+                                productData
+                            )
+                    }
+                );
 
         }
+
+
+        // ADD
+
+        else {
+
+            response =
+                await fetch(
+                    API_URL,
+                    {
+                        method: "POST",
+
+                        headers:
+                            getAuthHeaders(),
+
+                        body:
+                            JSON.stringify(
+                                productData
+                            )
+                    }
+                );
+
+        }
+
 
 
         const result =
             await response.json();
 
 
+
+        if (
+            response.status === 401
+        ) {
+
+            localStorage.removeItem(
+                TOKEN_KEY
+            );
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+
         if (!response.ok) {
 
             throw new Error(
                 result.message ||
-                "Failed to save product."
+                "Something went wrong"
             );
 
         }
 
 
-        showNotification(
-            editingProductId
-                ? "Product updated successfully!"
-                : "Product added successfully!"
-        );
+
+        // CLOSE MODAL
+
+        productModal.hide();
 
 
-        cancelForm();
 
+        // RELOAD PRODUCTS
 
         await loadProducts();
 
-    }
-    catch (error) {
 
-        console.error(
-            "Save product error:",
-            error
+
+        // SUCCESS MESSAGE
+
+        alert(
+            id
+                ? "Product updated successfully! ✅"
+                : "Product added successfully! ✅"
         );
+
+
+    } catch (error) {
+
+        console.error(error);
 
 
         alert(
-            error.message ||
-            "Cannot connect to backend."
+            "Error: " +
+            error.message
         );
-
-    }
-    finally {
-
-        button.disabled = false;
-
-        button.textContent =
-            editingProductId
-                ? "Update Product"
-                : "Save Product";
 
     }
 
 }
 
 
-// ========================================
+
+// =========================================
 // DELETE PRODUCT
-// ========================================
+// =========================================
 
 async function deleteProduct(id) {
+
 
     const confirmed =
         confirm(
@@ -1497,64 +1303,71 @@ async function deleteProduct(id) {
     }
 
 
+
     try {
+
 
         const response =
             await fetch(
-                `${API}/products/${id}`,
+                `${API_URL}/${id}`,
                 {
                     method: "DELETE",
 
-                    headers: {
-                        "Authorization":
-                            `Bearer ${adminToken}`
-                    }
+                    headers:
+                        getAuthHeaders()
                 }
             );
-
-
-        if (response.status === 401) {
-
-            handleUnauthorized();
-
-            return;
-
-        }
 
 
         const result =
             await response.json();
 
 
+
+        if (
+            response.status === 401
+        ) {
+
+            localStorage.removeItem(
+                TOKEN_KEY
+            );
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+
         if (!response.ok) {
 
             throw new Error(
                 result.message ||
-                "Failed to delete product."
+                "Failed to delete product"
             );
 
         }
 
 
-        showNotification(
-            "Product deleted successfully!"
+
+        alert(
+            "Product deleted successfully! 🗑️"
         );
 
 
         await loadProducts();
 
-    }
-    catch (error) {
 
-        console.error(
-            "Delete product error:",
-            error
-        );
+    } catch (error) {
+
+        console.error(error);
 
 
         alert(
-            error.message ||
-            "Cannot connect to backend."
+            "Error: " +
+            error.message
         );
 
     }
@@ -1562,288 +1375,149 @@ async function deleteProduct(id) {
 }
 
 
-// ========================================
-// CANCEL FORM
-// ========================================
 
-function cancelForm() {
+// =========================================
+// IMAGE PREVIEW
+// =========================================
 
-    editingProductId = null;
-
-
-    document.getElementById(
-        "productForm"
-    ).classList.remove(
-        "active"
-    );
+function previewImage() {
 
 
-    document.getElementById(
-        "productName"
-    ).value = "";
-
-
-    document.getElementById(
-        "productPrice"
-    ).value = "";
-
-
-    document.getElementById(
-        "productImage"
-    ).value = "";
-
-
-    document.getElementById(
-        "productAvailable"
-    ).checked = true;
-
-
-    document.getElementById(
-        "saveProductButton"
-    ).textContent =
-        "Save Product";
-
-}
-
-
-// ========================================
-// LOAD ORDER STATS
-// ========================================
-
-async function loadOrderStats() {
-
-    try {
-
-        const response =
-            await fetch(
-                `${API}/orders`,
-                {
-                    method: "GET",
-
-                    headers: {
-                        "Authorization":
-                            `Bearer ${adminToken}`
-                    }
-                }
-            );
-
-
-        if (response.status === 401) {
-
-            handleUnauthorized();
-
-            return;
-
-        }
-
-
-        if (!response.ok) {
-
-            return;
-
-        }
-
-
-        const orders =
-            await response.json();
-
-
-        const pending =
-            orders.filter(
-                order =>
-                    order.status === "Pending"
-            ).length;
-
-
+    const input =
         document.getElementById(
-            "pendingOrders"
-        ).textContent =
-            pending;
-
-    }
-    catch (error) {
-
-        console.error(
-            "Order stats error:",
-            error
+            "product-image"
         );
 
-    }
 
-}
-
-
-// ========================================
-// GO TO ORDERS
-// ========================================
-
-function goOrders() {
-
-    window.location.href =
-        "orders.html";
-
-}
-
-
-// ========================================
-// LOGOUT
-// ========================================
-
-async function logout() {
-
-    try {
-
-        await fetch(
-            `${API}/admin/logout`,
-            {
-                method: "POST",
-
-                headers: {
-                    "Authorization":
-                        `Bearer ${adminToken}`
-                }
-            }
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            "Logout error:",
-            error
-        );
-
-    }
-
-
-    localStorage.removeItem(
-        TOKEN_KEY
-    );
-
-
-    window.location.replace(
-        "login.html"
-    );
-
-}
-
-
-// ========================================
-// HANDLE UNAUTHORIZED
-// ========================================
-
-function handleUnauthorized() {
-
-    localStorage.removeItem(
-        TOKEN_KEY
-    );
-
-
-    adminToken = null;
-
-
-    window.location.replace(
-        "login.html"
-    );
-
-}
-
-
-// ========================================
-// NOTIFICATION
-// ========================================
-
-function showNotification(
-    message,
-    error = false
-) {
-
-    const box =
+    const preview =
         document.getElementById(
-            "notification"
+            "image-preview"
         );
 
 
-    box.textContent =
-        message;
+    const url =
+        input.value.trim();
 
 
-    box.style.background =
-        error
-            ? "#e53935"
-            : "#2e7d32";
+    if (!url) {
+
+        preview.style.display =
+            "none";
+
+        return;
+
+    }
 
 
-    box.style.display =
+    preview.src = url;
+
+    preview.style.display =
         "block";
 
 
-    setTimeout(
-        function () {
+    preview.onerror =
+        function() {
 
-            box.style.display =
+            preview.style.display =
                 "none";
 
-        },
-        3000
-    );
+        };
 
 }
 
 
-// ========================================
+
+// =========================================
 // ESCAPE HTML
-// ========================================
+// =========================================
 
-function escapeHtml(value) {
+function escapeHTML(text) {
 
-    return String(value)
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
+    const div =
+        document.createElement(
+            "div"
         );
 
+    div.textContent =
+        text;
+
+    return div.innerHTML;
+
 }
 
 
-// ========================================
-// REFRESH ORDER COUNT
-// ========================================
 
-setInterval(
-    function () {
+// =========================================
+// ESCAPE ATTRIBUTE
+// =========================================
 
-        if (
-            localStorage.getItem(
-                TOKEN_KEY
+function escapeAttribute(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+}
+
+
+
+// =========================================
+// START
+// =========================================
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function() {
+
+
+        productModal =
+            new bootstrap.Modal(
+                document.getElementById(
+                    "productModal"
+                )
+            );
+
+
+
+        // SEARCH EVENT
+
+        document
+            .getElementById(
+                "product-search"
             )
-        ) {
+            .addEventListener(
+                "input",
+                searchProducts
+            );
 
-            loadOrderStats();
+
+
+        // CHECK LOGIN
+
+        const loggedIn =
+            await checkAdminLogin();
+
+
+        if (!loggedIn) {
+
+            return;
 
         }
 
-    },
-    5000
+
+
+        // LOAD PRODUCTS
+
+        loadProducts();
+
+    }
 );
 
 </script>
 
+
 </body>
+
 </html>
