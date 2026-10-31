@@ -12,8 +12,21 @@
 
     <title>Admin Login - Shams Food Stall</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+
+        :root {
+            --dark: #14151f;
+            --orange: #ff7a1a;
+            --orange-dark: #e56608;
+            --text: #1d1f2b;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --red: #e11d48;
+        }
 
         * {
             box-sizing: border-box;
@@ -21,30 +34,23 @@
             padding: 0;
         }
 
-
         body {
-
             min-height: 100vh;
-
             display: flex;
-
             align-items: center;
             justify-content: center;
-
             padding: 20px;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
+            font-family: "Poppins", Arial, Helvetica, sans-serif;
+            color: var(--text);
             background:
-                linear-gradient(
-                    135deg,
-                    #202428,
-                    #343a40
-                );
+                radial-gradient(circle at 15% 20%, rgba(255, 122, 26, 0.35), transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(255, 179, 71, 0.25), transparent 45%),
+                linear-gradient(135deg, #14151f, #272a3d);
+        }
 
+        button,
+        input {
+            font-family: inherit;
         }
 
 
@@ -53,20 +59,18 @@
         ========================= */
 
         .login-card {
-
             width: 100%;
             max-width: 430px;
-
             background: white;
-
-            border-radius: 20px;
-
+            border-radius: 24px;
             overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            animation: card-in 0.5s ease;
+        }
 
-            box-shadow:
-                0 15px 40px
-                rgba(0, 0, 0, 0.30);
-
+        @keyframes card-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
 
@@ -75,42 +79,34 @@
         ========================= */
 
         .login-header {
-
-            background: #202428;
-
+            background: linear-gradient(135deg, var(--dark), #2a2d42);
             color: white;
-
-            padding: 35px 25px;
-
+            padding: 36px 25px 32px;
             text-align: center;
-
         }
-
 
         .brand-icon {
-
-            font-size: 55px;
-
-            margin-bottom: 10px;
-
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 14px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, var(--orange), #ffb347);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 10px 25px rgba(255, 122, 26, 0.4);
         }
-
 
         .login-header h1 {
-
-            font-size: 27px;
-
-            margin-bottom: 7px;
-
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
-
         .login-header p {
-
-            color: #cfd3d6;
-
-            font-size: 15px;
-
+            color: #9ca3af;
+            font-size: 14px;
         }
 
 
@@ -119,20 +115,19 @@
         ========================= */
 
         .login-body {
-
-            padding: 35px;
-
+            padding: 34px;
         }
 
-
         .login-body h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
 
-            font-size: 23px;
-
-            margin-bottom: 25px;
-
-            color: #222;
-
+        .login-sub {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 24px;
         }
 
 
@@ -141,32 +136,27 @@
         ========================= */
 
         .error-message {
-
             display: none;
-
-            background: #ffebee;
-
-            color: #c62828;
-
-            border: 1px solid #ef9a9a;
-
-            border-radius: 7px;
-
+            background: #ffe4e8;
+            color: #be123c;
+            border: 1px solid #fecdd3;
+            border-radius: 12px;
             padding: 12px 14px;
-
             margin-bottom: 20px;
-
             font-size: 14px;
-
+            font-weight: 500;
             line-height: 1.4;
-
         }
 
-
         .error-message.show {
-
             display: block;
+            animation: shake 0.35s ease;
+        }
 
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
         }
 
 
@@ -175,54 +165,65 @@
         ========================= */
 
         .form-group {
-
             margin-bottom: 20px;
-
         }
-
 
         .form-group label {
-
             display: block;
-
-            font-weight: bold;
-
+            font-weight: 600;
+            font-size: 13px;
             margin-bottom: 7px;
-
-            color: #333;
-
         }
 
+        .input-wrap {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            pointer-events: none;
+        }
 
         .form-group input {
-
             width: 100%;
-
-            padding: 13px 14px;
-
-            border: 1px solid #ccc;
-
-            border-radius: 7px;
-
-            font-size: 16px;
-
+            padding: 13px 14px 13px 44px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
             outline: none;
-
-            transition:
-                border-color 0.2s,
-                box-shadow 0.2s;
-
+            background: #fafafa;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
-
         .form-group input:focus {
+            border-color: var(--orange);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.12);
+        }
 
-            border-color: #1976d2;
+        .password-input {
+            padding-right: 48px !important;
+        }
 
-            box-shadow:
-                0 0 0 3px
-                rgba(25, 118, 210, 0.12);
+        .toggle-password {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 6px 8px;
+            border-radius: 8px;
+        }
 
+        .toggle-password:hover {
+            background: #f3f4f6;
         }
 
 
@@ -231,44 +232,31 @@
         ========================= */
 
         .login-button {
-
             width: 100%;
-
             padding: 14px;
-
             border: none;
-
-            border-radius: 7px;
-
-            background: #1976d2;
-
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
             color: white;
-
             font-size: 16px;
-
-            font-weight: bold;
-
+            font-weight: 600;
             cursor: pointer;
-
-            transition:
-                background 0.2s;
-
+            box-shadow: 0 8px 20px rgba(255, 122, 26, 0.35);
+            transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
         }
 
-
-        .login-button:hover {
-
-            background: #1565c0;
-
+        .login-button:hover:not(:disabled) {
+            box-shadow: 0 10px 26px rgba(255, 122, 26, 0.5);
+            transform: translateY(-1px);
         }
 
+        .login-button:active:not(:disabled) {
+            transform: scale(0.98);
+        }
 
         .login-button:disabled {
-
-            background: #90caf9;
-
+            opacity: 0.65;
             cursor: not-allowed;
-
         }
 
 
@@ -277,29 +265,20 @@
         ========================= */
 
         .back-link-container {
-
             text-align: center;
-
-            margin-top: 25px;
-
+            margin-top: 24px;
         }
-
 
         .back-link {
-
-            color: #1976d2;
-
+            color: var(--muted);
             text-decoration: none;
-
             font-size: 14px;
-
+            font-weight: 500;
+            transition: color 0.2s ease;
         }
 
-
         .back-link:hover {
-
-            text-decoration: underline;
-
+            color: var(--orange);
         }
 
 
@@ -308,24 +287,15 @@
         ========================= */
 
         .loading-text {
-
             display: none;
-
             text-align: center;
-
-            color: #666;
-
+            color: var(--muted);
             font-size: 14px;
-
             margin-bottom: 15px;
-
         }
 
-
         .loading-text.show {
-
             display: block;
-
         }
 
 
@@ -336,37 +306,25 @@
         @media (max-width: 500px) {
 
             body {
-
                 padding: 12px;
-
             }
-
 
             .login-header {
-
-                padding: 30px 20px;
-
+                padding: 28px 20px 26px;
             }
-
 
             .login-body {
-
-                padding: 25px 20px;
-
+                padding: 26px 20px;
             }
-
 
             .brand-icon {
-
-                font-size: 48px;
-
+                width: 66px;
+                height: 66px;
+                font-size: 34px;
             }
 
-
             .login-header h1 {
-
-                font-size: 23px;
-
+                font-size: 22px;
             }
 
         }
@@ -410,8 +368,12 @@
     <div class="login-body">
 
         <h2>
-            Admin Login
+            Welcome back 👋
         </h2>
+
+        <p class="login-sub">
+            Sign in to manage your restaurant.
+        </p>
 
 
         <div
@@ -439,13 +401,19 @@
                     Username
                 </label>
 
-                <input
-                    type="text"
-                    id="username"
-                    placeholder="Enter username"
-                    required
-                    autocomplete="username"
-                >
+                <div class="input-wrap">
+
+                    <span class="input-icon">👤</span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter username"
+                        required
+                        autocomplete="username"
+                    >
+
+                </div>
 
             </div>
 
@@ -458,13 +426,29 @@
                     Password
                 </label>
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter password"
-                    required
-                    autocomplete="current-password"
-                >
+                <div class="input-wrap">
+
+                    <span class="input-icon">🔒</span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        class="password-input"
+                        placeholder="Enter password"
+                        required
+                        autocomplete="current-password"
+                    >
+
+                    <button
+                        type="button"
+                        id="toggle-password"
+                        class="toggle-password"
+                        aria-label="Show or hide password"
+                    >
+                        👁️
+                    </button>
+
+                </div>
 
             </div>
 
@@ -564,6 +548,39 @@ const loadingText =
     );
 
 
+const togglePasswordButton =
+    document.getElementById(
+        "toggle-password"
+    );
+
+
+// ========================================
+// SHOW / HIDE PASSWORD
+// ========================================
+
+togglePasswordButton.addEventListener(
+    "click",
+    function () {
+
+        const hidden =
+            passwordInput.type === "password";
+
+
+        passwordInput.type =
+            hidden
+                ? "text"
+                : "password";
+
+
+        togglePasswordButton.textContent =
+            hidden
+                ? "🙈"
+                : "👁️";
+
+    }
+);
+
+
 // ========================================
 // SHOW ERROR
 // ========================================
@@ -572,6 +589,13 @@ function showError(message) {
 
     errorMessage.textContent =
         message;
+
+    errorMessage.classList.remove(
+        "show"
+    );
+
+    // restart shake animation
+    void errorMessage.offsetWidth;
 
     errorMessage.classList.add(
         "show"

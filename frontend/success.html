@@ -6,121 +6,245 @@
 
     <title>Order Successful - Shams Food Stall</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --text: #1d1f2b;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+
+            --dark: #14151f;
+            --orange: #ff7a1a;
+            --orange-dark: #e56608;
+            --green: #16a34a;
+            --green-dark: #15803d;
+        }
+
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             min-height: 100vh;
-            font-family: Arial, sans-serif;
-            background: #f7f7f7;
+            font-family: "Poppins", Arial, sans-serif;
+            color: var(--text);
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            background:
+                radial-gradient(circle at 12% 20%, rgba(22, 163, 74, 0.28), transparent 45%),
+                radial-gradient(circle at 88% 80%, rgba(255, 122, 26, 0.3), transparent 45%),
+                linear-gradient(135deg, #14151f, #272a3d);
         }
+
+        /* ================= CARD ================= */
 
         .success-card {
             width: 100%;
-            max-width: 600px;
+            max-width: 560px;
             background: white;
-            border-radius: 16px;
-            padding: 40px 25px;
+            border-radius: 26px;
+            padding: 42px 30px 34px;
             text-align: center;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+            animation: card-in 0.5s ease;
         }
 
+        @keyframes card-in {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ================= ICON ================= */
+
         .success-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 22px;
             border-radius: 50%;
-            background: #198754;
+            background: linear-gradient(135deg, var(--green), var(--green-dark));
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 42px;
+            font-size: 48px;
             font-weight: bold;
+            box-shadow: 0 10px 28px rgba(22, 163, 74, 0.45);
+            animation: pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
         }
 
         h1 {
-            margin: 0 0 12px;
-            font-size: 32px;
-            color: #198754;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
         .message {
-            margin: 0 auto 25px;
-            color: #555;
-            font-size: 17px;
-            line-height: 1.6;
+            margin: 0 auto 26px;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.7;
         }
 
+        .message strong {
+            color: var(--text);
+        }
+
+        /* ================= ORDER BOX ================= */
+
         .order-box {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px 22px;
+            margin: 0 0 24px;
             text-align: left;
         }
 
-        .order-box p {
-            margin: 8px 0;
+        .order-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding-bottom: 14px;
+            border-bottom: 1px dashed #d1d5db;
+            margin-bottom: 14px;
         }
 
-        .order-id {
-            word-break: break-all;
-            font-size: 14px;
-            color: #555;
+        .order-number-label {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 500;
         }
 
-        .total {
-            font-size: 22px;
-            font-weight: bold;
-            color: #0d6efd;
+        .order-number {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
         }
 
         .status {
             display: inline-block;
-            margin-top: 8px;
-            padding: 7px 12px;
-            border-radius: 20px;
-            background: #fff3cd;
-            color: #664d03;
-            font-weight: bold;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: #ffedd5;
+            color: #c2410c;
+            font-weight: 600;
+            font-size: 13px;
         }
 
-        .home-button {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 13px 25px;
-            border-radius: 8px;
-            background: #198754;
-            color: white;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
+        .items-list {
+            list-style: none;
+            margin-bottom: 14px;
         }
 
-        .home-button:hover {
-            opacity: 0.9;
+        .items-list li {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 7px 0;
+            font-size: 14px;
+        }
+
+        .items-list .item-name {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .items-list .item-qty {
+            color: var(--orange-dark);
+            font-weight: 700;
+            margin-right: 6px;
+        }
+
+        .items-list .item-total {
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            border-radius: 14px;
+            background: #fff7f0;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .total-row span:last-child {
+            color: var(--orange);
+            font-size: 22px;
+        }
+
+        .full-id {
+            margin-top: 12px;
+            font-size: 11px;
+            color: #9ca3af;
+            word-break: break-all;
         }
 
         .empty-message {
-            color: #777;
-            line-height: 1.6;
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 14px;
+            text-align: center;
         }
 
-        @media (max-width: 600px) {
+        /* ================= BUTTON ================= */
+
+        .home-button {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 8px 20px rgba(255, 122, 26, 0.35);
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .home-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 26px rgba(255, 122, 26, 0.5);
+        }
+
+        .home-button:active {
+            transform: scale(0.97);
+        }
+
+        .footer-note {
+            margin-top: 18px;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        @media (max-width: 520px) {
             .success-card {
-                padding: 30px 20px;
+                padding: 32px 18px 28px;
             }
 
             h1 {
-                font-size: 27px;
+                font-size: 24px;
+            }
+
+            .order-box {
+                padding: 16px;
             }
         }
     </style>
@@ -151,6 +275,10 @@
             ← Back to Menu
         </a>
 
+        <p class="footer-note">
+            🍔 Fresh food, made with love.
+        </p>
+
     </div>
 
     <script>
@@ -158,6 +286,15 @@
 
         function formatMoney(amount) {
             return "₹" + Number(amount || 0).toFixed(2);
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
 
         function loadOrder() {
@@ -186,10 +323,18 @@
                 return;
             }
 
-            const orderId =
+            const orderId = String(
                 order._id ||
                 order.id ||
-                "Received";
+                "Received"
+            );
+
+            /* Same short number the restaurant sees in the admin panel */
+
+            const shortId =
+                orderId === "Received"
+                    ? "Received"
+                    : orderId.slice(-6).toUpperCase();
 
             const total =
                 order.total ||
@@ -199,58 +344,67 @@
                 order.status ||
                 "Pending";
 
-            const itemCount =
+            const items =
                 Array.isArray(order.items)
-                    ? order.items.reduce(
-                        (sum, item) =>
-                            sum + (Number(item.quantity) || 0),
-                        0
-                    )
-                    : 0;
+                    ? order.items
+                    : [];
+
+            const itemsHtml = items.map((item) => {
+                const quantity = Number(item.quantity) || 0;
+                const price = Number(item.price) || 0;
+
+                return `
+                    <li>
+                        <span class="item-name">
+                            <span class="item-qty">${quantity}×</span>
+                            ${escapeHtml(item.name || "Item")}
+                        </span>
+
+                        <span class="item-total">
+                            ${formatMoney(price * quantity)}
+                        </span>
+                    </li>
+                `;
+            }).join("");
 
             container.innerHTML = `
                 <div class="order-box">
 
-                    <p>
-                        <strong>Order ID:</strong>
-                    </p>
+                    <div class="order-head">
 
-                    <p class="order-id">
-                        ${escapeHtml(String(orderId))}
-                    </p>
+                        <div>
+                            <div class="order-number-label">
+                                Order number
+                            </div>
 
-                    <p>
-                        <strong>Items:</strong>
-                        ${itemCount}
-                    </p>
+                            <div class="order-number">
+                                #${escapeHtml(shortId)}
+                            </div>
+                        </div>
 
-                    <p>
-                        <strong>Total:</strong>
-                    </p>
+                        <span class="status">
+                            ${escapeHtml(String(status))}
+                        </span>
 
-                    <p class="total">
-                        ${formatMoney(total)}
-                    </p>
+                    </div>
 
-                    <p>
-                        <strong>Status:</strong>
-                    </p>
+                    ${
+                        itemsHtml
+                            ? `<ul class="items-list">${itemsHtml}</ul>`
+                            : ""
+                    }
 
-                    <span class="status">
-                        ${escapeHtml(String(status))}
-                    </span>
+                    <div class="total-row">
+                        <span>Total</span>
+                        <span>${formatMoney(total)}</span>
+                    </div>
+
+                    <p class="full-id">
+                        Order ID: ${escapeHtml(orderId)}
+                    </p>
 
                 </div>
             `;
-        }
-
-        function escapeHtml(value) {
-            return value
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
         }
 
         loadOrder();

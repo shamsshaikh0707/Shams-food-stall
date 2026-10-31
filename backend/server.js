@@ -35,6 +35,36 @@ app.use(
 );
 
 /* =========================================
+   STORE STATUS (OPEN / CLOSED)
+   Saved in MongoDB so it survives restarts
+   ========================================= */
+
+const settingSchema = new mongoose.Schema({
+    key: { type: String, required: true, unique: true },
+    isOpen: { type: Boolean, default: true },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+const Setting =
+    mongoose.models.Setting ||
+    mongoose.model("Setting", settingSchema);
+
+const STORE_KEY = "store";
+
+async function getStoreStatus() {
+    let setting = await Setting.findOne({ key: STORE_KEY });
+
+    if (!setting) {
+        setting = await Setting.create({
+            key: STORE_KEY,
+            isOpen: true
+        });
+    }
+
+    return setting;
+}
+
+/* =========================================
    ADMIN AUTHENTICATION
    ========================================= */
 
@@ -109,6 +139,74 @@ app.get("/api/admin/check", requireAdmin, (req, res) => {
     res.json({
         authenticated: true
     });
+});
+
+/* =========================================
+   GET STORE STATUS
+   PUBLIC (customer site uses this too)
+   ========================================= */
+
+app.get("/api/store-status", async (req, res) => {
+    try {
+        const setting = await getStoreStatus();
+
+        res.json({
+            isOpen: setting.isOpen
+        });
+    } catch (error) {
+        console.error("Get store status error:", error);
+
+        res.status(500).json({
+            message: "Failed to fetch store status"
+        });
+    }
+});
+
+/* =========================================
+   SET STORE STATUS
+   ADMIN ONLY
+   Body: { "isOpen": true | false }
+   ========================================= */
+
+app.put("/api/admin/store-status", requireAdmin, async (req, res) => {
+    try {
+        const { isOpen } = req.body;
+
+        if (typeof isOpen !== "boolean") {
+            return res.status(400).json({
+                message: "isOpen must be true or false"
+            });
+        }
+
+        const setting = await Setting.findOneAndUpdate(
+            { key: STORE_KEY },
+            { isOpen, updatedAt: new Date() },
+            {
+                upsert: true,
+                returnDocument: "after",
+                setDefaultsOnInsert: true
+            }
+        );
+
+        console.log(
+            setting.isOpen
+                ? "🟢 Restaurant is now OPEN"
+                : "🔴 Restaurant is now CLOSED"
+        );
+
+        res.json({
+            message: setting.isOpen
+                ? "Restaurant is now open"
+                : "Restaurant is now closed",
+            isOpen: setting.isOpen
+        });
+    } catch (error) {
+        console.error("Set store status error:", error);
+
+        res.status(500).json({
+            message: "Failed to update store status"
+        });
+    }
 });
 
 /* =========================================
@@ -267,10 +365,25 @@ app.delete("/api/products/:id", requireAdmin, async (req, res) => {
 /* =========================================
    CREATE ORDER
    PUBLIC
+   (blocked while the restaurant is closed)
    ========================================= */
 
 app.post("/api/orders", async (req, res) => {
     try {
+        /* -----------------------------
+           STORE OPEN CHECK
+           ----------------------------- */
+
+        const storeSetting = await getStoreStatus();
+
+        if (!storeSetting.isOpen) {
+            return res.status(403).json({
+                closed: true,
+                message:
+                    "Sorry, the restaurant is closed right now. Please try again later."
+            });
+        }
+
         const {
             customer,
             address,
