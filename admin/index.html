@@ -6,7 +6,33 @@
 
     <title>Shams Restaurant - Admin Dashboard</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg: #f4f5f9;
+            --card: #ffffff;
+            --text: #1d1f2b;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+
+            --dark: #14151f;
+            --orange: #ff7a1a;
+            --orange-dark: #e56608;
+            --blue: #2563eb;
+            --blue-dark: #1d4ed8;
+            --green: #16a34a;
+            --green-dark: #15803d;
+            --red: #e11d48;
+            --red-dark: #be123c;
+
+            --radius: 16px;
+            --shadow: 0 4px 20px rgba(20, 21, 31, 0.06);
+            --shadow-lg: 0 10px 30px rgba(20, 21, 31, 0.12);
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,9 +40,10 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f5f5f5;
-            color: #222;
+            font-family: "Poppins", Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
         }
 
         button,
@@ -27,73 +54,246 @@
         button {
             border: none;
             cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        }
+
+        button:active:not(:disabled) {
+            transform: scale(0.96);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ================= CLOSED BANNER ================= */
+
+        .closed-banner {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, var(--red-dark), var(--red));
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        body.is-closed .closed-banner {
+            display: flex;
         }
 
         /* ================= HEADER ================= */
 
         header {
-            background: #111;
+            background: var(--dark);
             color: white;
-            padding: 18px 30px;
+            padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
         }
 
-        header h1 {
-            font-size: 24px;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--orange), #ffb347);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .brand h1 {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .brand span {
+            font-size: 12px;
+            color: #9ca3af;
+            font-weight: 400;
         }
 
         .header-buttons {
             display: flex;
+            align-items: center;
             gap: 10px;
             flex-wrap: wrap;
         }
 
+        .header-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 9px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+            animation: pulse-green 1.8s infinite;
+        }
+
+        body.is-closed .dot {
+            background: var(--red);
+            animation: none;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6); }
+            70% { box-shadow: 0 0 0 9px rgba(22, 163, 74, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+        }
+
         .orders-btn {
-            background: #ff9800;
+            background: var(--orange);
             color: white;
-            padding: 11px 18px;
-            border-radius: 7px;
-            font-weight: bold;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .orders-btn:hover {
-            background: #f57c00;
+            background: var(--orange-dark);
         }
 
         .logout-btn {
-            background: #e53935;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            padding: 11px 18px;
-            border-radius: 7px;
-            font-weight: bold;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .logout-btn:hover {
-            background: #c62828;
+            background: var(--red);
         }
 
         /* ================= MAIN ================= */
 
         .container {
             max-width: 1200px;
-            margin: 30px auto;
+            margin: 30px auto 60px;
             padding: 0 20px;
         }
 
         .welcome {
-            margin-bottom: 25px;
+            margin-bottom: 24px;
         }
 
         .welcome h2 {
-            margin-bottom: 6px;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
         .welcome p {
-            color: #666;
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        /* ================= STORE CONTROL ================= */
+
+        .store-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 22px 26px;
+            margin-bottom: 24px;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--green);
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        body.is-closed .store-control {
+            border-left-color: var(--red);
+            background: #fff5f6;
+        }
+
+        .store-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .store-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: #dcfce7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        body.is-closed .store-icon {
+            background: #ffe4e8;
+        }
+
+        .store-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .store-info p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .store-btn {
+            padding: 14px 26px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            background: var(--red);
+            box-shadow: 0 6px 16px rgba(225, 29, 72, 0.3);
+            min-width: 210px;
+        }
+
+        .store-btn:hover:not(:disabled) {
+            background: var(--red-dark);
+        }
+
+        body.is-closed .store-btn {
+            background: var(--green);
+            box-shadow: 0 6px 16px rgba(22, 163, 74, 0.3);
+        }
+
+        body.is-closed .store-btn:hover:not(:disabled) {
+            background: var(--green-dark);
         }
 
         /* ================= STATS ================= */
@@ -102,38 +302,68 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
 
         .stat-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background: var(--card);
+            padding: 22px 24px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
+        .stat-card.clickable {
+            cursor: pointer;
+        }
+
+        .stat-card.clickable:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.blue { background: #dbeafe; }
+        .stat-icon.green { background: #dcfce7; }
+        .stat-icon.orange { background: #ffedd5; }
+
         .stat-card h3 {
-            color: #777;
-            font-size: 15px;
-            margin-bottom: 10px;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 2px;
         }
 
         .stat-card p {
-            font-size: 30px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
         }
 
         .pending-number {
-            color: #ff9800;
+            color: var(--orange);
         }
 
         /* ================= SECTION ================= */
 
         .section {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            background: var(--card);
+            padding: 26px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
 
         .section-header {
@@ -146,89 +376,105 @@
         }
 
         .section-header h2 {
-            font-size: 22px;
+            font-size: 21px;
+            font-weight: 700;
         }
 
         .add-btn {
-            background: #2e7d32;
+            background: var(--green);
             color: white;
-            padding: 11px 18px;
-            border-radius: 7px;
-            font-weight: bold;
+            padding: 11px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .add-btn:hover {
-            background: #1b5e20;
+            background: var(--green-dark);
         }
 
         /* ================= SEARCH ================= */
 
         .search-area {
-            margin-bottom: 25px;
+            margin-bottom: 24px;
         }
 
         .search-box {
             width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 14px 18px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-size: 15px;
             outline: none;
+            background: #fafafa;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
         .search-box:focus {
-            border-color: #1976d2;
-            box-shadow: 0 0 0 2px rgba(25,118,210,0.1);
+            border-color: var(--orange);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.12);
         }
 
         .search-result {
             margin-top: 8px;
-            color: #777;
-            font-size: 14px;
+            color: var(--muted);
+            font-size: 13px;
         }
 
         /* ================= FORM ================= */
 
         .product-form {
             display: none;
-            background: #f7f7f7;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            border: 1px solid #ddd;
+            background: #fafafa;
+            padding: 22px;
+            border-radius: 14px;
+            margin-bottom: 26px;
+            border: 1.5px dashed #d1d5db;
         }
 
         .product-form.active {
             display: block;
+            animation: slide-down 0.25s ease;
+        }
+
+        @keyframes slide-down {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .product-form h3 {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            font-size: 18px;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 2fr;
-            gap: 15px;
+            gap: 16px;
         }
 
         .form-group label {
             display: block;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 13px;
             margin-bottom: 7px;
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 15px;
+            padding: 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
             outline: none;
+            background: white;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .form-group input:focus {
-            border-color: #1976d2;
+            border-color: var(--orange);
+            box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.12);
         }
 
         .availability {
@@ -237,11 +483,17 @@
 
         .availability label {
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .availability input {
-            margin-right: 7px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--green);
         }
 
         .form-buttons {
@@ -251,43 +503,57 @@
         }
 
         .save-btn {
-            background: #1976d2;
+            background: var(--blue);
             color: white;
-            padding: 11px 18px;
-            border-radius: 6px;
-            font-weight: bold;
+            padding: 11px 22px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .save-btn:hover {
-            background: #1565c0;
+            background: var(--blue-dark);
         }
 
         .cancel-btn {
-            background: #777;
-            color: white;
-            padding: 11px 18px;
-            border-radius: 6px;
-            font-weight: bold;
+            background: #e5e7eb;
+            color: #374151;
+            padding: 11px 22px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .cancel-btn:hover {
-            background: #555;
+            background: #d1d5db;
         }
 
         /* ================= PRODUCTS ================= */
 
         .products {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 22px;
         }
 
         .product-card {
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .image-wrap {
+            position: relative;
         }
 
         .product-image,
@@ -295,69 +561,93 @@
             width: 100%;
             height: 180px;
             object-fit: cover;
+            display: block;
         }
 
         .no-image {
-            background: #eee;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #888;
+            color: #9ca3af;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            backdrop-filter: blur(6px);
+        }
+
+        .badge.available {
+            background: rgba(220, 252, 231, 0.95);
+            color: #15803d;
+        }
+
+        .badge.unavailable {
+            background: rgba(255, 228, 232, 0.95);
+            color: #be123c;
         }
 
         .product-info {
             padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         .product-info h3 {
-            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
         }
 
         .price {
             font-size: 20px;
-            font-weight: bold;
-            color: #1976d2;
-            margin-bottom: 8px;
-        }
-
-        .available {
-            color: #198754;
-            font-weight: bold;
-        }
-
-        .unavailable {
-            color: #dc3545;
-            font-weight: bold;
+            font-weight: 700;
+            color: var(--orange);
         }
 
         .product-actions {
             display: flex;
             gap: 8px;
-            margin-top: 15px;
+            margin-top: auto;
+            padding-top: 16px;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            flex: 1;
+            padding: 10px 13px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 13px;
         }
 
         .edit-btn {
-            background: #1976d2;
-            color: white;
-            padding: 9px 13px;
-            border-radius: 6px;
-            font-weight: bold;
-        }
-
-        .delete-btn {
-            background: #dc3545;
-            color: white;
-            padding: 9px 13px;
-            border-radius: 6px;
-            font-weight: bold;
+            background: #dbeafe;
+            color: var(--blue);
         }
 
         .edit-btn:hover {
-            background: #1565c0;
+            background: var(--blue);
+            color: white;
+        }
+
+        .delete-btn {
+            background: #ffe4e8;
+            color: var(--red);
         }
 
         .delete-btn:hover {
-            background: #bb2d3b;
+            background: var(--red);
+            color: white;
         }
 
         /* ================= EMPTY / LOADING ================= */
@@ -367,7 +657,7 @@
             grid-column: 1 / -1;
             text-align: center;
             padding: 50px 20px;
-            color: #777;
+            color: var(--muted);
         }
 
         /* ================= NOTIFICATION ================= */
@@ -376,31 +666,36 @@
             position: fixed;
             right: 20px;
             bottom: 20px;
-            background: #198754;
+            background: #14151f;
             color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 15px 22px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
             display: none;
             z-index: 9999;
             max-width: 350px;
+            font-size: 14px;
+            font-weight: 500;
+            border-left: 5px solid var(--green);
         }
 
         .notification.error {
-            background: #dc3545;
+            border-left-color: var(--red);
         }
 
         .notification.show {
             display: block;
+            animation: pop-in 0.25s ease;
+        }
+
+        @keyframes pop-in {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* ================= RESPONSIVE ================= */
 
         @media (max-width: 900px) {
-            .products {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             .form-grid {
                 grid-template-columns: 1fr;
             }
@@ -410,18 +705,28 @@
             header {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 14px 16px;
+                position: static;
             }
 
             .stats {
                 grid-template-columns: 1fr;
             }
 
-            .products {
-                grid-template-columns: 1fr;
-            }
-
             .container {
                 padding: 0 12px;
+            }
+
+            .store-control {
+                padding: 18px;
+            }
+
+            .store-btn {
+                width: 100%;
+            }
+
+            .section {
+                padding: 18px;
             }
         }
     </style>
@@ -429,11 +734,26 @@
 
 <body>
 
+<div class="closed-banner">
+    🔴 The restaurant is currently <strong>CLOSED</strong>. Customers cannot place orders.
+</div>
+
 <header>
 
-    <h1>🍔 Shams Restaurant - Admin</h1>
+    <div class="brand">
+        <div class="brand-logo">🍔</div>
+        <div>
+            <h1>Shams Restaurant</h1>
+            <span>Admin Dashboard</span>
+        </div>
+    </div>
 
     <div class="header-buttons">
+
+        <div class="header-status">
+            <span class="dot"></span>
+            <span id="headerStoreStatus">Checking...</span>
+        </div>
 
         <button
             class="orders-btn"
@@ -468,46 +788,84 @@
     </div>
 
 
+    <!-- ================= RESTAURANT OPEN / CLOSED ================= -->
+
+    <div class="store-control">
+
+        <div class="store-info">
+
+            <div class="store-icon" id="storeIcon">🟢</div>
+
+            <div>
+                <h3 id="storeTitle">Checking status...</h3>
+                <p id="storeText">Loading restaurant status.</p>
+            </div>
+
+        </div>
+
+        <button
+            class="store-btn"
+            id="storeToggleButton"
+            onclick="toggleStore()"
+            disabled
+        >
+            Please wait...
+        </button>
+
+    </div>
+
+
     <!-- ================= STATS ================= -->
 
     <div class="stats">
 
         <div class="stat-card">
 
-            <h3>Total Products</h3>
+            <div class="stat-icon blue">🍽️</div>
 
-            <p id="totalProducts">
-                0
-            </p>
+            <div>
+                <h3>Total Products</h3>
+
+                <p id="totalProducts">
+                    0
+                </p>
+            </div>
 
         </div>
 
 
         <div class="stat-card">
 
-            <h3>Available Products</h3>
+            <div class="stat-icon green">✅</div>
 
-            <p id="availableProducts">
-                0
-            </p>
+            <div>
+                <h3>Available Products</h3>
+
+                <p id="availableProducts">
+                    0
+                </p>
+            </div>
 
         </div>
 
 
         <div
-            class="stat-card"
+            class="stat-card clickable"
             onclick="goOrders()"
-            style="cursor:pointer;"
         >
 
-            <h3>Pending Orders</h3>
+            <div class="stat-icon orange">⏳</div>
 
-            <p
-                id="pendingOrders"
-                class="pending-number"
-            >
-                0
-            </p>
+            <div>
+                <h3>Pending Orders</h3>
+
+                <p
+                    id="pendingOrders"
+                    class="pending-number"
+                >
+                    0
+                </p>
+            </div>
 
         </div>
 
@@ -584,7 +942,7 @@
                 <div class="form-group">
 
                     <label for="productPrice">
-                        Price
+                        Price (₹)
                     </label>
 
                     <input
@@ -698,6 +1056,10 @@
 
     let lastPendingCount = 0;
 
+    let storeOpen = true;
+
+    let storeBusy = false;
+
 
     /* =====================================================
        HELPERS
@@ -736,13 +1098,269 @@
             error
         );
 
+        notification.classList.remove("show");
+
+        // restart animation
+        void notification.offsetWidth;
+
         notification.classList.add("show");
 
-        setTimeout(() => {
+        clearTimeout(showNotification.timer);
+
+        showNotification.timer = setTimeout(() => {
 
             notification.classList.remove("show");
 
         }, 3500);
+
+    }
+
+
+    function imageFailed(img) {
+
+        const placeholder =
+            document.createElement("div");
+
+        placeholder.className = "no-image";
+
+        placeholder.textContent = "No Image";
+
+        img.replaceWith(placeholder);
+
+    }
+
+
+    /* =====================================================
+       RESTAURANT OPEN / CLOSED
+    ===================================================== */
+
+    function setStoreUI(isOpen) {
+
+        storeOpen = isOpen;
+
+        document.body.classList.toggle(
+            "is-closed",
+            !isOpen
+        );
+
+
+        const button =
+            document.getElementById("storeToggleButton");
+
+
+        document.getElementById(
+            "headerStoreStatus"
+        ).textContent =
+            isOpen
+                ? "Restaurant Open"
+                : "Restaurant Closed";
+
+
+        document.getElementById(
+            "storeIcon"
+        ).textContent =
+            isOpen
+                ? "🟢"
+                : "🔴";
+
+
+        document.getElementById(
+            "storeTitle"
+        ).textContent =
+            isOpen
+                ? "Restaurant is OPEN"
+                : "Restaurant is CLOSED";
+
+
+        document.getElementById(
+            "storeText"
+        ).textContent =
+            isOpen
+                ? "Customers can place orders right now."
+                : "Customers can see the menu but cannot place orders.";
+
+
+        button.textContent =
+            isOpen
+                ? "🔴 Restaurant is Closed"
+                : "🟢 Open Restaurant";
+
+
+        button.disabled = storeBusy;
+
+    }
+
+
+    async function loadStoreStatus() {
+
+        if (storeBusy) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/store-status`
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to load store status"
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            setStoreUI(
+                data.isOpen !== false
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Store status error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    async function toggleStore() {
+
+        if (storeBusy) {
+
+            return;
+
+        }
+
+
+        const makeOpen = !storeOpen;
+
+
+        if (!makeOpen) {
+
+            const confirmed =
+                confirm(
+                    "Close the restaurant?\n\nCustomers will not be able to place new orders until you open it again."
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+        }
+
+
+        storeBusy = true;
+
+        const button =
+            document.getElementById("storeToggleButton");
+
+        button.disabled = true;
+
+        button.textContent = "Please wait...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/admin/store-status`,
+                    {
+                        method: "PUT",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Authorization":
+                                `Bearer ${adminToken}`
+
+                        },
+
+                        body:
+                            JSON.stringify({
+                                isOpen: makeOpen
+                            })
+
+                    }
+                );
+
+
+            if (response.status === 401) {
+
+                handleUnauthorized();
+
+                return;
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    result.message ||
+                    "Failed to update restaurant status."
+                );
+
+            }
+
+
+            storeBusy = false;
+
+            setStoreUI(result.isOpen);
+
+
+            showNotification(
+                result.isOpen
+                    ? "🟢 Restaurant is now OPEN"
+                    : "🔴 Restaurant is now CLOSED"
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Toggle store error:",
+                error
+            );
+
+
+            showNotification(
+                error.message ||
+                "Cannot connect to backend.",
+                true
+            );
+
+        }
+        finally {
+
+            storeBusy = false;
+
+            setStoreUI(storeOpen);
+
+        }
 
     }
 
@@ -1028,10 +1646,7 @@
                                     src="${image}"
                                     class="product-image"
                                     alt="${name}"
-                                    onerror="
-                                        this.onerror=null;
-                                        this.style.display='none';
-                                    "
+                                    onerror="imageFailed(this)"
                                 >
                             `
                             : `
@@ -1044,19 +1659,11 @@
                     return `
                         <div class="product-card">
 
-                            ${imageHtml}
+                            <div class="image-wrap">
 
-                            <div class="product-info">
+                                ${imageHtml}
 
-                                <h3>
-                                    ${name}
-                                </h3>
-
-                                <div class="price">
-                                    ₹${price.toFixed(2)}
-                                </div>
-
-                                <div class="${
+                                <span class="badge ${
                                     product.available
                                         ? "available"
                                         : "unavailable"
@@ -1068,6 +1675,18 @@
                                             : "✕ Unavailable"
                                     }
 
+                                </span>
+
+                            </div>
+
+                            <div class="product-info">
+
+                                <h3>
+                                    ${name}
+                                </h3>
+
+                                <div class="price">
+                                    ₹${price.toFixed(2)}
                                 </div>
 
 
@@ -1077,14 +1696,14 @@
                                         class="edit-btn"
                                         onclick="editProductById('${product._id}')"
                                     >
-                                        Edit
+                                        ✏️ Edit
                                     </button>
 
                                     <button
                                         class="delete-btn"
                                         onclick="deleteProduct('${product._id}')"
                                     >
-                                        Delete
+                                        🗑️ Delete
                                     </button>
 
                                 </div>
@@ -1222,10 +1841,12 @@
         ).classList.add("active");
 
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        document
+            .getElementById("productForm")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
 
     }
 
@@ -1264,8 +1885,9 @@
 
         if (!name) {
 
-            alert(
-                "Please enter product name."
+            showNotification(
+                "Please enter product name.",
+                true
             );
 
             return;
@@ -1278,8 +1900,9 @@
             Number(price) < 0
         ) {
 
-            alert(
-                "Please enter a valid price."
+            showNotification(
+                "Please enter a valid price.",
+                true
             );
 
             return;
@@ -1780,18 +2403,27 @@
         }
 
 
+        await loadStoreStatus();
+
         await loadProducts();
 
         await loadOrderStats();
 
 
         /*
-            Check orders every 5 seconds.
-            This keeps Pending Orders updated.
+            Check orders and restaurant status every 5 seconds.
+            This keeps Pending Orders and Open/Closed in sync
+            (even if you change it from another device).
         */
 
         setInterval(
-            loadOrderStats,
+            () => {
+
+                loadOrderStats();
+
+                loadStoreStatus();
+
+            },
             5000
         );
 

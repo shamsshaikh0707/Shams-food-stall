@@ -12,6 +12,9 @@
 
     <title>Shams Restaurant</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link
@@ -22,8 +25,93 @@
 
     <style>
 
+        :root {
+            --bg: #f6f6fa;
+            --text: #1d1f2b;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+
+            --dark: #14151f;
+            --orange: #ff7a1a;
+            --orange-dark: #e56608;
+            --green: #16a34a;
+            --green-dark: #15803d;
+            --red: #e11d48;
+            --red-dark: #be123c;
+
+            --shadow: 0 4px 20px rgba(20, 21, 31, 0.07);
+            --shadow-lg: 0 14px 34px rgba(20, 21, 31, 0.16);
+        }
+
         body {
-            background: #f8f9fa;
+            font-family: "Poppins", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================
+           CUSTOM BUTTONS
+        ========================= */
+
+        .btn-orange {
+            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+            color: white;
+            border: none;
+            font-weight: 600;
+            border-radius: 12px;
+            padding: 11px 18px;
+            box-shadow: 0 6px 16px rgba(255, 122, 26, 0.3);
+            transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        }
+
+        .btn-orange:hover:not(:disabled) {
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 9px 22px rgba(255, 122, 26, 0.45);
+        }
+
+        .btn-orange:active:not(:disabled) {
+            transform: scale(0.97);
+        }
+
+        .btn-orange:disabled {
+            background: #9ca3af;
+            box-shadow: none;
+            color: white;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+
+        body.is-closed .btn-orange:disabled {
+            background: var(--red);
+            opacity: 0.85;
+        }
+
+
+        /* =========================
+           CLOSED BANNER
+        ========================= */
+
+        .closed-banner {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, var(--red-dark), var(--red));
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        body.is-closed .closed-banner {
+            display: flex;
         }
 
 
@@ -32,19 +120,46 @@
         ========================= */
 
         .navbar {
-            background: #212529;
+            background: var(--dark);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
         }
 
-
         .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             font-weight: 700;
+            font-size: 19px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--orange), #ffb347);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 22px;
         }
 
-
         .cart-button {
-            border-radius: 25px;
-            font-weight: 600;
+            border-radius: 999px;
+            padding: 10px 20px;
+        }
+
+        .cart-count {
+            background: white;
+            color: var(--orange-dark);
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 2px 9px;
+            margin-left: 6px;
         }
 
 
@@ -53,21 +168,67 @@
         ========================= */
 
         .hero {
-            background: #212529;
             color: white;
-            padding: 70px 20px;
+            padding: 80px 20px 90px;
+            background:
+                radial-gradient(circle at 12% 25%, rgba(255, 122, 26, 0.45), transparent 45%),
+                radial-gradient(circle at 88% 80%, rgba(255, 179, 71, 0.28), transparent 45%),
+                linear-gradient(135deg, #14151f, #272a3d);
         }
 
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(6px);
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse-green 1.8s infinite;
+        }
+
+        body.is-closed .dot {
+            background: var(--red);
+            animation: none;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+            70% { box-shadow: 0 0 0 9px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 800;
+            line-height: 1.15;
         }
 
+        .hero h1 span {
+            color: #ffb347;
+        }
 
         .hero p {
-            font-size: 19px;
-            color: #ced4da;
+            font-size: 18px;
+            color: #cbd0dc;
+            max-width: 520px;
+        }
+
+        .hero-cta {
+            margin-top: 26px;
+            display: inline-block;
+            text-decoration: none;
+            padding: 13px 28px;
         }
 
 
@@ -76,34 +237,50 @@
         ========================= */
 
         .search-section {
-            margin-top: -25px;
+            margin-top: -34px;
             position: relative;
             z-index: 2;
         }
 
-
         .search-box {
             background: white;
-            border-radius: 14px;
-            padding: 18px;
-
-            box-shadow:
-                0 8px 25px
-                rgba(0, 0, 0, 0.10);
+            border-radius: 18px;
+            padding: 18px 20px;
+            box-shadow: var(--shadow-lg);
         }
-
 
         .search-input {
-            border-radius: 10px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
             padding: 13px 16px;
             font-size: 16px;
+            background: #fafafa;
+        }
+
+        .search-input:focus {
+            border-color: var(--orange);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.12);
+        }
+
+        .search-result {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 8px;
         }
 
 
-        .search-result {
-            color: #6c757d;
-            font-size: 14px;
-            margin-top: 8px;
+        /* =========================
+           MENU TITLE
+        ========================= */
+
+        .menu-title h2 {
+            font-weight: 700;
+            font-size: 30px;
+        }
+
+        .menu-title p {
+            color: var(--muted);
         }
 
 
@@ -113,84 +290,230 @@
 
         .product-card {
             border: none;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            transition: 0.2s;
+            background: white;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
-
 
         .product-card:hover {
-            transform: translateY(-5px);
-
-            box-shadow:
-                0 12px 30px
-                rgba(0, 0, 0, 0.12) !important;
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
         }
 
+        .image-wrap {
+            position: relative;
+            overflow: hidden;
+        }
 
         .product-image {
             width: 100%;
-            height: 230px;
+            height: 220px;
             object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
         }
 
+        .product-card:hover .product-image {
+            transform: scale(1.06);
+        }
 
         .no-image {
-            height: 230px;
-
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            background: #e9ecef;
-
-            color: #6c757d;
-
-            font-size: 18px;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            color: #9ca3af;
+            font-size: 16px;
+            font-weight: 500;
         }
 
+        .price-chip {
+            position: absolute;
+            right: 14px;
+            bottom: 14px;
+            background: var(--dark);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
 
         .product-name {
             font-weight: 700;
+            font-size: 19px;
+            margin-bottom: 14px;
         }
 
-
-        .product-price {
-            color: #0d6efd;
-            font-size: 22px;
-            font-weight: 700;
-        }
-
-
-        .out-of-stock {
-            opacity: 0.65;
+        .add-btn {
+            width: 100%;
+            margin-top: auto;
         }
 
 
         /* =========================
-           CART
+           CART MODAL
         ========================= */
 
-        .cart-item {
-            border-bottom: 1px solid #dee2e6;
-            padding: 15px 0;
+        .modal-content {
+            border: none;
+            border-radius: 22px;
+            overflow: hidden;
         }
 
+        .modal-header {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 18px 24px;
+        }
 
-        .quantity-controls {
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+
+        .modal-footer {
+            border-top: 1px dashed var(--border);
+            padding: 16px 24px;
+        }
+
+        .cart-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px dashed var(--border);
         }
 
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-thumb,
+        .cart-thumb-empty {
+            width: 62px;
+            height: 62px;
+            border-radius: 14px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .cart-thumb-empty {
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+
+        .cart-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-info h6 {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .cart-info small {
+            color: var(--muted);
+        }
+
+        .cart-right {
+            text-align: right;
+        }
 
         .quantity-btn {
             width: 32px;
             height: 32px;
-
             padding: 0;
-
             border-radius: 50%;
+            border: 1.5px solid var(--border);
+            background: white;
+            font-weight: 700;
+            line-height: 1;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .quantity-btn:hover {
+            border-color: var(--orange);
+            background: #fff1e6;
+        }
+
+        .remove-btn {
+            border: none;
+            background: #ffe4e8;
+            color: var(--red);
+            border-radius: 10px;
+            width: 34px;
+            height: 34px;
+        }
+
+        .remove-btn:hover {
+            background: var(--red);
+            color: white;
+        }
+
+        .cart-total-label {
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        .cart-total {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--orange);
+        }
+
+        .modal-closed-note {
+            display: none;
+            background: #ffe4e8;
+            color: #be123c;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+        body.is-closed .modal-closed-note {
+            display: block;
+        }
+
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast-msg {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--dark);
+            color: white;
+            padding: 13px 20px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 9999;
+            box-shadow: var(--shadow-lg);
+            border-left: 5px solid var(--green);
+            animation: toast-in 0.25s ease;
+            max-width: 320px;
+        }
+
+        .toast-msg.error {
+            border-left-color: var(--red);
+        }
+
+        @keyframes toast-in {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
 
@@ -200,12 +523,9 @@
 
         footer {
             margin-top: 80px;
-            padding: 30px;
-
-            background: #212529;
-
+            padding: 36px 20px;
+            background: var(--dark);
             color: white;
-
             text-align: center;
         }
 
@@ -217,22 +537,36 @@
         @media (max-width: 576px) {
 
             .hero {
-                padding: 50px 20px;
+                padding: 55px 20px 70px;
             }
-
 
             .hero h1 {
-                font-size: 36px;
+                font-size: 34px;
             }
-
 
             .hero p {
-                font-size: 17px;
+                font-size: 16px;
             }
 
+            .navbar-brand {
+                font-size: 16px;
+            }
 
-            .search-section {
-                margin-top: -15px;
+            .menu-title h2 {
+                font-size: 25px;
+            }
+
+            .toast-msg {
+                left: 16px;
+                right: 16px;
+                bottom: 16px;
+                max-width: none;
+            }
+
+            .cart-thumb,
+            .cart-thumb-empty {
+                width: 52px;
+                height: 52px;
             }
 
         }
@@ -244,6 +578,19 @@
 
 
 <body>
+
+
+<!-- =====================================
+     CLOSED BANNER
+===================================== -->
+
+<div class="closed-banner">
+
+    🔴 Sorry, we're <strong>closed right now</strong>.
+    You can look at the menu, but ordering is paused.
+
+</div>
+
 
 
 <!-- =====================================
@@ -259,14 +606,16 @@
             href="#"
         >
 
-            🍔 Shams Restaurant
+            <span class="brand-logo">🍔</span>
+
+            Shams Restaurant
 
         </a>
 
 
 
         <button
-            class="btn btn-primary cart-button"
+            class="btn btn-orange cart-button"
             onclick="openCart()"
         >
 
@@ -274,7 +623,7 @@
 
             <span
                 id="cart-count"
-                class="badge bg-light text-dark ms-1"
+                class="cart-count"
             >
                 0
             </span>
@@ -299,10 +648,21 @@
 
             <div class="col-lg-8">
 
+                <div class="status-pill">
+
+                    <span class="dot"></span>
+
+                    <span id="status-text">
+                        Checking...
+                    </span>
+
+                </div>
+
+
                 <h1>
 
-                    Fresh food,
-                    made with love. ❤️
+                    Fresh food,<br>
+                    made with <span>love.</span> ❤️
 
                 </h1>
 
@@ -314,6 +674,16 @@
                     made fresh for you.
 
                 </p>
+
+
+                <a
+                    href="#menu"
+                    class="btn btn-orange hero-cta"
+                >
+
+                    View Menu ↓
+
+                </a>
 
             </div>
 
@@ -329,7 +699,7 @@
      MENU
 ===================================== -->
 
-<main class="container py-5">
+<main class="container pb-5" id="menu">
 
 
     <!-- SEARCH -->
@@ -370,16 +740,16 @@
 
     <!-- MENU TITLE -->
 
-    <div class="mb-4">
+    <div class="mb-4 menu-title">
 
-        <h2 class="fw-bold">
+        <h2>
 
             Our Menu
 
         </h2>
 
 
-        <p class="text-muted">
+        <p>
 
             Choose your favourite food
 
@@ -399,7 +769,8 @@
         <div class="col-12 text-center py-5">
 
             <div
-                class="spinner-border text-primary"
+                class="spinner-border"
+                style="color: var(--orange);"
                 role="status"
             ></div>
 
@@ -429,7 +800,7 @@
     tabindex="-1"
 >
 
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
 
         <div class="modal-content">
 
@@ -457,10 +828,16 @@
 
             <!-- BODY -->
 
-            <div
-                class="modal-body"
-                id="cart-container"
-            >
+            <div class="modal-body px-4">
+
+                <div class="modal-closed-note">
+
+                    🔴 The restaurant is closed right now,
+                    so you can't check out yet.
+
+                </div>
+
+                <div id="cart-container"></div>
 
             </div>
 
@@ -472,28 +849,29 @@
 
                 <div class="me-auto">
 
-                    <strong>
-                        Total:
-                    </strong>
+                    <div class="cart-total-label">
+                        Total
+                    </div>
 
 
-                    <span
+                    <div
                         id="cart-total"
-                        class="text-primary fw-bold"
+                        class="cart-total"
                     >
                         ₹0
-                    </span>
+                    </div>
 
                 </div>
 
 
 
                 <button
-                    class="btn btn-success"
+                    id="checkout-btn"
+                    class="btn btn-orange"
                     onclick="checkout()"
                 >
 
-                    Checkout
+                    Checkout →
 
                 </button>
 
@@ -514,7 +892,7 @@
 
 <footer>
 
-    <p class="mb-0">
+    <p class="mb-1 fw-bold">
 
         🍔 Shams Restaurant
 
@@ -549,6 +927,9 @@
 const API_URL =
     "/api/products";
 
+const STORE_STATUS_URL =
+    "/api/store-status";
+
 
 
 // =====================================
@@ -572,6 +953,149 @@ let allProducts = [];
 // =====================================
 
 let cartModal;
+
+
+
+// =====================================
+// RESTAURANT OPEN / CLOSED
+// =====================================
+
+let storeOpen = true;
+
+
+
+// =====================================
+// HELPERS
+// =====================================
+
+function formatPrice(value) {
+
+    const number =
+        Number(value) || 0;
+
+    return "₹" + (
+        Number.isInteger(number)
+            ? number
+            : number.toFixed(2)
+    );
+
+}
+
+
+
+// =====================================
+// STORE STATUS
+// =====================================
+
+function applyStoreState() {
+
+
+    document.body.classList.toggle(
+        "is-closed",
+        !storeOpen
+    );
+
+
+    document.getElementById(
+        "status-text"
+    ).textContent =
+        storeOpen
+            ? "Open now · Taking orders"
+            : "Closed right now";
+
+
+    const checkoutBtn =
+        document.getElementById(
+            "checkout-btn"
+        );
+
+
+    checkoutBtn.disabled =
+        !storeOpen;
+
+
+    checkoutBtn.textContent =
+        storeOpen
+            ? "Checkout →"
+            : "🔴 Restaurant Closed";
+
+}
+
+
+async function loadStoreStatus() {
+
+
+    try {
+
+
+        const response =
+            await fetch(
+                STORE_STATUS_URL,
+                {
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            return;
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const nowOpen =
+            data.isOpen !== false;
+
+
+        const changed =
+            nowOpen !== storeOpen;
+
+
+        storeOpen =
+            nowOpen;
+
+
+        applyStoreState();
+
+
+        /*
+         * Re-draw the menu so the
+         * Add to Cart buttons match.
+         */
+
+        if (changed) {
+
+            searchProducts();
+
+        }
+
+
+    } catch (error) {
+
+        /*
+         * If the check fails we do not
+         * block customers. The server
+         * still refuses orders while closed.
+         */
+
+        console.error(
+            "Store status error:",
+            error
+        );
+
+        document.getElementById(
+            "status-text"
+        ).textContent =
+            "Welcome!";
+
+    }
+
+}
 
 
 
@@ -789,16 +1313,26 @@ function renderProducts(products) {
             productDiv.innerHTML = `
 
                 <div
-                    class="card product-card shadow-sm h-100"
+                    class="card product-card h-100"
                 >
 
 
-                    ${imageHTML}
+                    <div class="image-wrap">
+
+                        ${imageHTML}
+
+                        <span class="price-chip">
+
+                            ${formatPrice(product.price)}
+
+                        </span>
+
+                    </div>
 
 
 
                     <div
-                        class="card-body d-flex flex-column"
+                        class="card-body d-flex flex-column p-4"
                     >
 
 
@@ -810,32 +1344,17 @@ function renderProducts(products) {
 
 
 
-                        <div class="product-price mb-3">
-
-                            ₹${Number(product.price).toFixed(2)}
-
-                        </div>
-
-
-
-                        <div class="mb-3">
-
-                            <span class="badge bg-success">
-
-                                Available
-
-                            </span>
-
-                        </div>
-
-
-
                         <button
-                            class="btn btn-primary mt-auto"
-                            onclick='addToCart(${JSON.stringify(product)})'
+                            class="btn btn-orange add-btn"
+                            onclick="addToCart('${escapeAttribute(product._id)}')"
+                            ${storeOpen ? "" : "disabled"}
                         >
 
-                            🛒 Add to Cart
+                            ${
+                                storeOpen
+                                    ? "🛒 Add to Cart"
+                                    : "🔴 Closed"
+                            }
 
                         </button>
 
@@ -883,7 +1402,7 @@ function searchProducts() {
         allProducts.filter(
             function(product) {
 
-                return product.name
+                return String(product.name || "")
                     .toLowerCase()
                     .includes(searchTerm);
 
@@ -904,7 +1423,36 @@ function searchProducts() {
 // ADD TO CART
 // =====================================
 
-function addToCart(product) {
+function addToCart(productId) {
+
+
+    if (!storeOpen) {
+
+        showToast(
+            "Sorry, we're closed right now.",
+            true
+        );
+
+        return;
+
+    }
+
+
+    const product =
+        allProducts.find(
+            function(item) {
+
+                return item._id === productId;
+
+            }
+        );
+
+
+    if (!product) {
+
+        return;
+
+    }
 
 
     const existing =
@@ -996,6 +1544,13 @@ function loadCart() {
         }
 
     } catch (error) {
+
+        cart = [];
+
+    }
+
+
+    if (!Array.isArray(cart)) {
 
         cart = [];
 
@@ -1130,6 +1685,30 @@ function renderCart() {
 
 
 
+            const thumbHTML =
+                item.image
+
+                ? `
+
+                    <img
+                        src="${escapeAttribute(item.image)}"
+                        class="cart-thumb"
+                        alt=""
+                        onerror="this.style.display='none';"
+                    >
+
+                `
+
+                : `
+
+                    <div class="cart-thumb-empty">
+                        🍔
+                    </div>
+
+                `;
+
+
+
             const div =
                 document.createElement(
                     "div"
@@ -1142,81 +1721,78 @@ function renderCart() {
 
             div.innerHTML = `
 
-                <div class="row align-items-center">
+                ${thumbHTML}
 
 
-                    <div class="col-7">
+                <div class="cart-info">
 
-                        <h6 class="fw-bold mb-1">
+                    <h6>
 
-                            ${escapeHTML(item.name)}
+                        ${escapeHTML(item.name)}
 
-                        </h6>
+                    </h6>
 
 
-                        <small class="text-muted">
+                    <small>
 
-                            ₹${item.price} each
+                        ${formatPrice(item.price)} each
 
-                        </small>
+                    </small>
+
+                </div>
+
+
+
+                <div class="cart-right">
+
+
+                    <div
+                        class="d-flex align-items-center justify-content-end gap-2"
+                    >
+
+
+                        <button
+                            class="quantity-btn"
+                            onclick="decreaseQuantity(${index})"
+                        >
+                            −
+                        </button>
+
+
+                        <strong>
+
+                            ${item.quantity}
+
+                        </strong>
+
+
+                        <button
+                            class="quantity-btn"
+                            onclick="increaseQuantity(${index})"
+                        >
+                            +
+                        </button>
+
+
+                        <button
+                            class="remove-btn"
+                            onclick="removeFromCart(${index})"
+                        >
+                            🗑️
+                        </button>
+
 
                     </div>
 
 
 
-                    <div class="col-5">
+                    <div class="mt-2">
 
+                        <strong>
 
-                        <div
-                            class="d-flex align-items-center justify-content-end gap-2"
-                        >
+                            ${formatPrice(itemTotal)}
 
-
-                            <button
-                                class="btn btn-outline-secondary quantity-btn"
-                                onclick="decreaseQuantity(${index})"
-                            >
-                                −
-                            </button>
-
-
-                            <strong>
-
-                                ${item.quantity}
-
-                            </strong>
-
-
-                            <button
-                                class="btn btn-outline-secondary quantity-btn"
-                                onclick="increaseQuantity(${index})"
-                            >
-                                +
-                            </button>
-
-
-                            <button
-                                class="btn btn-outline-danger btn-sm"
-                                onclick="removeFromCart(${index})"
-                            >
-                                🗑️
-                            </button>
-
-
-                        </div>
-
-
-
-                        <div class="text-end mt-2">
-
-                            <strong>
-
-                                ₹${itemTotal}
-
-                            </strong>
-
-                        </div>
-
+                        </strong>
 
                     </div>
 
@@ -1236,7 +1812,7 @@ function renderCart() {
 
 
     totalElement.textContent =
-        `₹${total}`;
+        formatPrice(total);
 
 }
 
@@ -1331,10 +1907,23 @@ function removeFromCart(index) {
 function checkout() {
 
 
+    if (!storeOpen) {
+
+        showToast(
+            "Sorry, we're closed right now.",
+            true
+        );
+
+        return;
+
+    }
+
+
     if (cart.length === 0) {
 
-        alert(
-            "Your cart is empty."
+        showToast(
+            "Your cart is empty.",
+            true
         );
 
         return;
@@ -1360,7 +1949,20 @@ function checkout() {
 // TOAST
 // =====================================
 
-function showToast(message) {
+function showToast(message, error) {
+
+
+    const old =
+        document.querySelector(
+            ".toast-msg"
+        );
+
+
+    if (old) {
+
+        old.remove();
+
+    }
 
 
     const toast =
@@ -1369,44 +1971,13 @@ function showToast(message) {
         );
 
 
+    toast.className =
+        "toast-msg" +
+        (error ? " error" : "");
+
+
     toast.textContent =
         message;
-
-
-    toast.style.position =
-        "fixed";
-
-
-    toast.style.bottom =
-        "25px";
-
-
-    toast.style.right =
-        "25px";
-
-
-    toast.style.background =
-        "#212529";
-
-
-    toast.style.color =
-        "white";
-
-
-    toast.style.padding =
-        "12px 18px";
-
-
-    toast.style.borderRadius =
-        "8px";
-
-
-    toast.style.zIndex =
-        "9999";
-
-
-    toast.style.boxShadow =
-        "0 5px 20px rgba(0,0,0,0.2)";
 
 
     document.body.appendChild(
@@ -1420,7 +1991,7 @@ function showToast(message) {
             toast.remove();
 
         },
-        2000
+        2200
     );
 
 }
@@ -1459,6 +2030,7 @@ function escapeAttribute(text) {
     return String(text)
         .replace(/&/g, "&amp;")
         .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
 
@@ -1500,9 +2072,22 @@ document.addEventListener(
         loadCart();
 
 
+        // Restaurant open / closed
+
+        loadStoreStatus();
+
+
         // Load products
 
         loadProducts();
+
+
+        // Keep open / closed fresh
+
+        setInterval(
+            loadStoreStatus,
+            10000
+        );
 
     }
 );

@@ -6,27 +6,80 @@
 
     <title>Checkout - Shams Food Stall</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg: #f6f6fa;
+            --card: #ffffff;
+            --text: #1d1f2b;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+
+            --dark: #14151f;
+            --orange: #ff7a1a;
+            --orange-dark: #e56608;
+            --green: #16a34a;
+            --green-dark: #15803d;
+            --red: #e11d48;
+            --red-dark: #be123c;
+
+            --radius: 18px;
+            --shadow: 0 4px 20px rgba(20, 21, 31, 0.07);
+            --shadow-lg: 0 10px 30px rgba(20, 21, 31, 0.12);
+        }
+
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #222;
+            font-family: "Poppins", Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
         }
+
+        button,
+        input,
+        textarea {
+            font-family: inherit;
+        }
+
+        /* ================= CLOSED BANNER ================= */
+
+        .closed-banner {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(90deg, var(--red-dark), var(--red));
+            color: white;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        body.is-closed .closed-banner {
+            display: flex;
+        }
+
+        /* ================= HEADER ================= */
 
         header {
-            background: #111;
+            background: var(--dark);
             color: white;
-            padding: 18px 20px;
+            padding: 16px 20px;
+            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
         }
 
-        header .header-inner {
-            max-width: 1000px;
+        .header-inner {
+            max-width: 1050px;
             margin: auto;
             display: flex;
             align-items: center;
@@ -34,48 +87,96 @@
             gap: 15px;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 24px;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--orange), #ffb347);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .brand h1 {
+            font-size: 18px;
+            font-weight: 600;
         }
 
         .back-btn {
             color: white;
             text-decoration: none;
-            background: #f57c00;
-            padding: 9px 14px;
-            border-radius: 6px;
-            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s ease;
         }
 
+        .back-btn:hover {
+            background: var(--orange);
+        }
+
+        /* ================= LAYOUT ================= */
+
         .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 15px;
+            max-width: 1050px;
+            margin: 32px auto 60px;
+            padding: 0 16px;
         }
 
         .page-title {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 26px;
+        }
+
+        .page-title h2 {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .page-title p {
+            color: var(--muted);
+            font-size: 15px;
+            margin-top: 4px;
         }
 
         .checkout-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 26px;
+            align-items: start;
         }
 
         .box {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            background: var(--card);
+            padding: 28px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
 
-        .box h2 {
-            margin-top: 0;
+        .box h3 {
+            font-size: 19px;
+            font-weight: 700;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+
+        .summary-box {
+            position: sticky;
+            top: 20px;
+        }
+
+        /* ================= FORM ================= */
 
         .form-group {
             margin-bottom: 16px;
@@ -84,27 +185,36 @@
         label {
             display: block;
             margin-bottom: 7px;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 13px;
         }
 
         input,
         textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 7px;
+            padding: 13px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
             font-size: 15px;
             outline: none;
+            background: #fafafa;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
         input:focus,
         textarea:focus {
-            border-color: #f57c00;
+            border-color: var(--orange);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 122, 26, 0.12);
         }
 
         textarea {
             min-height: 100px;
             resize: vertical;
+        }
+
+        .section-divider {
+            margin: 30px 0 20px;
         }
 
         .address-grid {
@@ -113,118 +223,199 @@
             gap: 15px;
         }
 
+        .required {
+            color: var(--red);
+        }
+
+        /* ================= ORDER SUMMARY ================= */
+
         .order-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             gap: 15px;
             padding: 14px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px dashed var(--border);
         }
 
         .order-item:last-child {
             border-bottom: none;
         }
 
+        .item-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .qty-badge {
+            min-width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: #fff1e6;
+            color: var(--orange-dark);
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .item-name {
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 15px;
         }
 
         .item-details {
-            color: #666;
-            font-size: 14px;
-            margin-top: 5px;
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 2px;
         }
 
         .item-price {
-            font-weight: bold;
+            font-weight: 600;
             white-space: nowrap;
         }
 
         .total-row {
-            border-top: 2px solid #eee;
-            margin-top: 15px;
-            padding-top: 18px;
+            margin-top: 16px;
+            padding: 16px 18px;
+            border-radius: 14px;
+            background: #fff7f0;
             display: flex;
             justify-content: space-between;
-            font-size: 21px;
-            font-weight: bold;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 700;
         }
+
+        .total-row span:last-child {
+            color: var(--orange);
+        }
+
+        /* ================= PLACE ORDER BUTTON ================= */
 
         .place-order-btn {
             width: 100%;
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 22px;
+            padding: 16px;
             border: none;
-            border-radius: 8px;
-            background: #198754;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--green), var(--green-dark));
             color: white;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 17px;
+            font-weight: 600;
             cursor: pointer;
+            box-shadow: 0 8px 20px rgba(22, 163, 74, 0.3);
+            transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
         }
 
-        .place-order-btn:hover {
-            background: #157347;
+        .place-order-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 26px rgba(22, 163, 74, 0.45);
+        }
+
+        .place-order-btn:active:not(:disabled) {
+            transform: scale(0.98);
         }
 
         .place-order-btn:disabled {
-            background: #999;
+            background: #9ca3af;
+            box-shadow: none;
             cursor: not-allowed;
         }
+
+        body.is-closed .place-order-btn:disabled {
+            background: var(--red);
+            opacity: 0.85;
+        }
+
+        /* ================= EMPTY CART ================= */
 
         .empty-cart {
             text-align: center;
             padding: 30px 10px;
-            color: #777;
+            color: var(--muted);
+        }
+
+        .empty-cart .empty-icon {
+            font-size: 48px;
+            margin-bottom: 8px;
         }
 
         .empty-cart a {
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 16px;
             text-decoration: none;
-            background: #f57c00;
+            background: var(--orange);
             color: white;
-            padding: 10px 16px;
-            border-radius: 6px;
+            padding: 11px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
         }
+
+        .empty-cart a:hover {
+            background: var(--orange-dark);
+        }
+
+        /* ================= MESSAGE ================= */
 
         .message {
             display: none;
-            padding: 12px;
-            margin-bottom: 18px;
-            border-radius: 7px;
-            font-weight: bold;
+            padding: 14px 16px;
+            margin-bottom: 22px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 14px;
         }
 
-        .error {
-            background: #f8d7da;
-            color: #842029;
+        .message.error {
+            background: #ffe4e8;
+            color: #be123c;
+            border: 1px solid #fecdd3;
         }
 
-        .success {
-            background: #d1e7dd;
-            color: #0f5132;
+        .message.success {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #bbf7d0;
         }
 
-        .required {
-            color: #dc3545;
-        }
+        /* ================= RESPONSIVE ================= */
 
-        @media (max-width: 750px) {
+        @media (max-width: 800px) {
             .checkout-grid {
                 grid-template-columns: 1fr;
             }
 
+            /* show the order summary first on phones */
+            .summary-box {
+                order: -1;
+                position: static;
+            }
+        }
+
+        @media (max-width: 520px) {
             .address-grid {
                 grid-template-columns: 1fr;
             }
 
-            header .header-inner {
-                flex-direction: column;
+            .box {
+                padding: 20px;
             }
 
-            header h1 {
-                text-align: center;
+            .brand h1 {
+                font-size: 16px;
+            }
+
+            .back-btn {
+                padding: 9px 14px;
+                font-size: 13px;
+            }
+
+            .page-title h2 {
+                font-size: 24px;
             }
         }
     </style>
@@ -232,19 +423,31 @@
 
 <body>
 
+<div class="closed-banner">
+    🔴 Sorry, we're <strong>closed right now</strong>. You can't place an order at the moment.
+</div>
+
 <header>
     <div class="header-inner">
-        <h1>🍔 Shams Food Stall</h1>
+
+        <div class="brand">
+            <div class="brand-logo">🍔</div>
+            <h1>Shams Food Stall</h1>
+        </div>
 
         <a href="index.html" class="back-btn">
             ← Back to Menu
         </a>
+
     </div>
 </header>
 
 <div class="container">
 
-    <h1 class="page-title">Checkout</h1>
+    <div class="page-title">
+        <h2>Checkout</h2>
+        <p>Almost there! Fill in your details to place the order.</p>
+    </div>
 
     <div id="message" class="message"></div>
 
@@ -254,7 +457,7 @@
 
         <div class="box">
 
-            <h2>Customer Details</h2>
+            <h3>👤 Customer Details</h3>
 
             <form id="checkoutForm">
 
@@ -267,6 +470,7 @@
                         type="text"
                         id="name"
                         placeholder="Enter your full name"
+                        autocomplete="name"
                         required
                     >
                 </div>
@@ -280,13 +484,13 @@
                         type="tel"
                         id="phone"
                         placeholder="Enter your phone number"
+                        autocomplete="tel"
+                        inputmode="tel"
                         required
                     >
                 </div>
 
-                <h2 style="margin-top: 30px;">
-                    Delivery Address
-                </h2>
+                <h3 class="section-divider">📍 Delivery Address</h3>
 
                 <div class="address-grid">
 
@@ -312,6 +516,8 @@
                             type="text"
                             id="pincode"
                             placeholder="Pincode"
+                            inputmode="numeric"
+                            autocomplete="postal-code"
                             required
                         >
                     </div>
@@ -369,9 +575,9 @@
 
         <!-- ORDER SUMMARY -->
 
-        <div class="box">
+        <div class="box summary-box">
 
-            <h2>Your Order</h2>
+            <h3>🛒 Your Order</h3>
 
             <div id="orderItems"></div>
 
@@ -398,6 +604,61 @@
     const placeOrderBtn = document.getElementById("placeOrderBtn");
 
     let cart = [];
+
+    let storeOpen = true;
+
+    let isPlacing = false;
+
+    /* =========================================
+       STORE OPEN / CLOSED
+       ========================================= */
+
+    function updateOrderButton() {
+        document.body.classList.toggle(
+            "is-closed",
+            !storeOpen
+        );
+
+        if (isPlacing) {
+            placeOrderBtn.disabled = true;
+            placeOrderBtn.textContent = "Placing Order...";
+            return;
+        }
+
+        if (!storeOpen) {
+            placeOrderBtn.disabled = true;
+            placeOrderBtn.textContent = "🔴 Restaurant is Closed";
+            return;
+        }
+
+        placeOrderBtn.disabled = cart.length === 0;
+        placeOrderBtn.textContent = "Place Order";
+    }
+
+    async function loadStoreStatus() {
+        try {
+            const response = await fetch(
+                `${API}/store-status`,
+                { cache: "no-store" }
+            );
+
+            if (!response.ok) {
+                return;
+            }
+
+            const data = await response.json();
+
+            storeOpen = data.isOpen !== false;
+
+            updateOrderButton();
+        } catch (error) {
+            /*
+               If the check fails we do not block the customer.
+               The server still refuses orders while closed.
+            */
+            console.error("Store status error:", error);
+        }
+    }
 
     /* =========================================
        LOAD CART
@@ -432,6 +693,8 @@
         if (cart.length === 0) {
             orderItems.innerHTML = `
                 <div class="empty-cart">
+                    <div class="empty-icon">🛒</div>
+
                     <p>Your cart is empty.</p>
 
                     <a href="index.html">
@@ -441,7 +704,8 @@
             `;
 
             orderTotal.textContent = "₹0";
-            placeOrderBtn.disabled = true;
+
+            updateOrderButton();
 
             return;
         }
@@ -461,15 +725,19 @@
             div.className = "order-item";
 
             div.innerHTML = `
-                <div>
-                    <div class="item-name">
-                        ${escapeHtml(item.name || "Product")}
+                <div class="item-left">
+                    <div class="qty-badge">
+                        ${quantity}×
                     </div>
 
-                    <div class="item-details">
-                        ₹${price.toFixed(2)}
-                        ×
-                        ${quantity}
+                    <div>
+                        <div class="item-name">
+                            ${escapeHtml(item.name || "Product")}
+                        </div>
+
+                        <div class="item-details">
+                            ₹${price.toFixed(2)} each
+                        </div>
                     </div>
                 </div>
 
@@ -484,7 +752,7 @@
         orderTotal.textContent =
             "₹" + total.toFixed(2);
 
-        placeOrderBtn.disabled = false;
+        updateOrderButton();
     }
 
     /* =========================================
@@ -547,6 +815,15 @@
         event.preventDefault();
 
         hideMessage();
+
+        if (!storeOpen) {
+            showMessage(
+                "Sorry, the restaurant is closed right now. Please try again later.",
+                "error"
+            );
+
+            return;
+        }
 
         if (cart.length === 0) {
             showMessage(
@@ -639,9 +916,9 @@
             total
         };
 
-        placeOrderBtn.disabled = true;
-        placeOrderBtn.textContent =
-            "Placing Order...";
+        isPlacing = true;
+
+        updateOrderButton();
 
         try {
             const response = await fetch(
@@ -661,6 +938,14 @@
             const data = await response.json();
 
             if (!response.ok) {
+                /*
+                   The restaurant was closed by the admin
+                   after this page was opened.
+                */
+                if (data.closed) {
+                    storeOpen = false;
+                }
+
                 throw new Error(
                     data.message ||
                     "Failed to place order"
@@ -701,10 +986,9 @@
                 "error"
             );
 
-            placeOrderBtn.disabled = false;
+            isPlacing = false;
 
-            placeOrderBtn.textContent =
-                "Place Order";
+            updateOrderButton();
         }
     });
 
@@ -713,6 +997,11 @@
        ========================================= */
 
     loadCart();
+
+    loadStoreStatus();
+
+    /* keep the closed / open state fresh */
+    setInterval(loadStoreStatus, 10000);
 </script>
 
 </body>
